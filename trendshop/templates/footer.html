@@ -1,0 +1,97 @@
+{% load static %}
+<!-- Footer -->
+{% if user.is_superuser or user.is_staff %}
+<footer class="footer" style="margin-bottom: 0px">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span style="color: #01514b"></span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <strong style="color: #01514b">Harshil Sidapara</strong>
+        </div>
+    </div>
+</footer>
+{% else %}
+<footer id="footer" class="footer" style="background: rgba(108, 117, 125, 0.6)">
+
+    <div class="container">
+        <div class="row gy-3">
+            <div class="col-lg-3 col-md-6 footer-links d-flex">
+                <i class="fa-solid fa-location-dot fa-lg" style="color: #01514b;"></i>&nbsp;
+                <div>
+                    <h4>Location</h4>
+                    <p>
+                        605, 6th floor, ABC Point,<br>
+                        Iscon-Ambali Road, Ahmedabad - 380058<br>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links d-flex">
+                <i class="fa-solid fa-phone fa-lg" style="color: #01514b;"></i>&nbsp;
+                <div>
+                    <h4>Get with Us</h4>
+                    <p>
+                        <strong style="color: #01514b">Phone:</strong> +91 9876543210<br>
+                        <strong style="color: #01514b">Email:</strong> info@youandme.com<br>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links d-flex">
+                <i class="fa-solid fa-clock fa-lg" style="color: #01514b;"></i>&nbsp;
+                <div>
+                    <h4>Open Hours (Delivery)</h4>
+                    <p>
+                        <strong style="color: #01514b">WeekDays: </strong>10AM - 8PM<br>
+                        <strong style="color: #01514b">Weekends: </strong>10AM - 2PM<br>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links d-flex">
+                <i class="fa-solid fa-arrow-right fa-lg" style="color: #01514b;"></i>&nbsp;
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="social-links d-flex">
+                        <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                    <br>
+                    <h4><i class="fa-solid fa-calendar-days" style="color: #01514b;"></i> Newsletter</h4>
+                    <p>Enter email id for subscribing us to get all the latest updates.</p>
+                    <div>
+                        <form method="POST">
+                            <div class="input-group mb-3 col-md-12">
+                                <input type="email" class="form-control" aria-describedby="email-icon"
+                                    style="margin-left: -20px;">
+                                <span class="input-group-text" id="newsletter-send-icon">
+                                    <i class="fa-solid fa-paper-plane" style="color: #0b7a72;"
+                                        onclick="window.location.href='{% url 'trendshop_website:home' %}'"></i>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span style="color: #01514b">You & Me Shop</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <strong style="color: #01514b">Harshil Sidapara</strong>
+        </div>
+    </div>
+
+</footer>
+{% endif %}
+<!-- End Footer -->
+
+<link type="text/css" rel="stylesheet" href="{% static 'css/footer.css' %}" />

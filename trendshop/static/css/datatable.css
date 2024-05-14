@@ -1,0 +1,8 @@
+.dataTables_paginate {
+    margin-right: 10px !important;
+}
+
+.dataTables_filter {
+    margin-bottom: 10px;
+    display: none;
+}

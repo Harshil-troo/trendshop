@@ -1,0 +1,89 @@
+.footer {
+    font-size: 14px;
+    background-color: rgba(108, 117, 125, 0.6);
+    padding: 10px;
+    color: rgba(11, 122, 114, 1);
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.footer .icon {
+    margin-right: 15px;
+    font-size: 24px;
+    line-height: 0;
+}
+
+.footer h4 {
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 5px;
+    color: #01514b;
+}
+
+.footer .footer-links {
+    margin-bottom: 30px;
+}
+
+.footer .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer .footer-links ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.footer .footer-links ul li:first-child {
+    padding-top: 0;
+}
+
+.footer .footer-links ul a {
+    color: rgba(11, 122, 114, 1);
+    transition: 0.3s;
+    display: inline-block;
+    line-height: 1;
+}
+
+.footer .footer-links ul a:hover {
+    color: rgba(11, 122, 114, 1);
+}
+
+.footer .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(11, 122, 114, 1);
+    font-size: 16px;
+    color: rgba(11, 122, 114, 1);
+    margin-right: 10px;
+    transition: 0.3s;
+}
+
+.footer .social-links a:hover {
+    color: #01514b;
+    border-color: #01514b;
+    text-decoration: none;
+}
+
+.footer .copyright {
+    text-align: center;
+    padding-top: 0px;
+}
+
+.footer .credits {
+    padding-top: 4px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.footer .credits a {
+    color: rgba(11, 122, 114, 1);
+}

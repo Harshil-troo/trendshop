@@ -1,0 +1,18 @@
+.page-item.active .page-link {
+    columns: rgba(11, 122, 114, 1);
+    background-color: rgba(11, 122, 114, 1);
+    border: 1px solid rgba(11, 122, 114, 1);
+}
+
+.pagination>li>a {
+    color: rgba(11, 122, 114, 1);
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>span>a:focus,
+.pagination>span>a:hover {
+    background-color: rgba(11, 122, 114, 1);
+    border: 1px solid rgba(11, 122, 114, 1);
+    box-shadow: none;
+}

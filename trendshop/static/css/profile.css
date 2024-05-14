@@ -1,0 +1,13 @@
+body {
+    background: rgba(0, 0, 0, 0.2)
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #e6e2e7
+}
+
+.back:hover {
+    color: #f3f1f3;
+    cursor: pointer
+}
