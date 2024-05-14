@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +25,7 @@ AUTH_USER_MODEL = 'user.User'
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p$xz3wykkmwc-eae93virfz-)$cv)y_9_89=0b!e6_&1e@86s)'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,7 +94,7 @@ WSGI_APPLICATION = 'trendshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': env('DATABASE_NAME'),
     }
 }
 
@@ -171,8 +175,8 @@ LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': '188436285238-7qff39nqpifjgmfk1s6o6sur12j73lm2.apps.googleusercontent.com',
-            'secret': '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',
+            'client_id': env('CLIENT_ID'),
+            'secret': env('SECRET_KEY_GOOGLE'),
             'key': ''
         },
         'SCOPE': [
