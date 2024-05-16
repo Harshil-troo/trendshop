@@ -3,3 +3,7 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request, 'website.html')
+
+def become_seller(request):
+
+    return render(request, 'become_seller.html')

@@ -15,7 +15,7 @@
     justify-content: space-between;
     align-items:unset;
     flex-wrap: nowrap;
-    margin-top: 0px;
+    margin-top: 135px;
     margin-right: 0px;
     padding: 0px;
     overflow-x: auto; /* Enable horizontal scrolling if necessary */
@@ -134,4 +134,24 @@
 p.card-text-container{
     font-size: smaller;
 
+}
+
+#featured_carousel{
+    margin-bottom: 15px;
+    display: flex;
+}
+
+#carouselExampleControls,
+#carouselExampleControls2,
+#carouselExampleControls3{
+    width: 330px;
+    margin-left: auto;
+}
+
+#image_row{
+    margin-left: 5px;
+}
+
+p.card-body{
+    text-align: center;
 }
