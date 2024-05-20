@@ -114,3 +114,48 @@ class UserAddressForm(forms.ModelForm):
         """
         model = UserAddress
         fields = ['address', 'pincode', 'city', 'state', 'type']
+
+
+class UserForm(forms.ModelForm):
+    repassword = forms.CharField(required=True, label='Re-Enter Password',widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['user_types','first_name','last_name','email','password','gst','username','gender','phone_number']
+        labels = {
+            'first_name':'First Name',
+            'last_name':'Last Name',
+            'email':'Email Id',
+            'gst':'GST No.',
+            'username':'User Name',
+            'password':'Password',
+            'phone_number':'Phone Number'
+        }
+        widgets = {
+            'password':forms.PasswordInput,
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        repassword = cleaned_data.get("repassword")
+        if password != repassword:
+            raise forms.ValidationError("Please type the same password.")
+        return cleaned_data
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['gst'].required = False
+
+class UserUpdateForm(UserForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            if name != 'gst' and name != 'user_types':
+                field.disabled = True
+
+
+
+
+
+

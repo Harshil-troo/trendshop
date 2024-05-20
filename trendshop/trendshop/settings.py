@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-p$xz3wykkmwc-eae93virfz-)$cv)y_9_89=0b!e6_&1e@86s)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'psycopg2',
 ]
 
 MIDDLEWARE = [
@@ -89,8 +90,12 @@ WSGI_APPLICATION = 'trendshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'trendshop',
+        'USER':'postgres',
+        'PASSWORD':'postgres',
+        'HOST':'localhost',
+        'PORT':5432,
     }
 }
 
@@ -141,7 +146,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'harshil.sidapara@trootech.com'
-EMAIL_HOST_PASSWORD = 'Harshil@Troo123'
+EMAIL_HOST_PASSWORD = 'xdfu kyag kbwn sxkv'
 EMAIL_FILE_PATH = BASE_DIR / 'emails'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")

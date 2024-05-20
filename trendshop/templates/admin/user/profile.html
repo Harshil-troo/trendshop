@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <button type="button" class="btn btn-primary" onclick="getResponseForProfileUpdate()">
+                        <button type="submit" class="btn btn-primary">
                             Save Profile
                         </button>
                         <a class="btn btn-secondary" href="{% url 'user:password_change'%}">
@@ -102,10 +102,7 @@
 </div>
 
 <link type="text/css" rel="stylesheet" href="{% static 'css/profile.css' %}" />
-<link type="text/css" rel="stylesheet" href="{% static 'css/select2.css' %}" />
-<script src="{% static 'js/select2.js' %}"></script>
-<script src="{% static 'js/user/user.js' %}"></script>
-<script src="{% static 'js/toast.js' %}"></script>
+
 {% endblock content %}
 {% block footer %}
 {% include 'footer.html' %}

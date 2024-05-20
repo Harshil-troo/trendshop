@@ -5,8 +5,8 @@ from trendshop.settings import EMAIL_HOST_USER
 
 
 @shared_task()
-def send_welcome_email(user_email, username):
-    context = {'username': username}
+def send_welcome_email(user_email, first_name):
+    context = {'first_name': first_name}
     email_html = render_to_string('email/welcome_email.html', context)
 
     email = EmailMessage(
@@ -16,4 +16,5 @@ def send_welcome_email(user_email, username):
         to=[user_email],
         headers={'Reply-To': EMAIL_HOST_USER}
     )
+    email.content_subtype = "html"
     email.send(fail_silently=True)

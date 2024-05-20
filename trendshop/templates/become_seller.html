@@ -4,36 +4,52 @@
 {% block content %}
 <div class="main">
     <h2>Registration Form</h2>
-    <form  method="POST" class="post-form" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="first">First Name:</label>
-        <input type="text" id="first" name="first" required />
-        <label for="last">Last Name:</label>
-        <input type="text" id="last" name="last" required />
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-        <label for="email">GST No.:</label>
-        <input type="text" id="gst" name="gst" maxlength="15" required />
-        <label for="email">Username:</label>
-        <input type="text" id="username" name="username" required />
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9])\S{8,}$" title="Password must contain at least one number,
-                one alphabet, one symbol, and be at
-                least 8 characters long" required />
-        <label for="repassword">Re-type Password:</label>
-        <input type="password" id="repassword" name="repassword" required />
-        <label for="mobile">Contact:</label>
-        <input type="tel" id="mobile" name="mobile" maxlength="10" pattern="[6-9]{1}-[0-9]{3}" required />
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-            <option value="male"> Male </option>
-            <option value="female"> Female </option>
-            <option value="other"> Other </option>
-        </select>
-        <button type="submit"> Submit </button>
-    </form>
+    <div class="row">
+        <form method="POST" class="post-form" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="input-group mb-3 col-md-12" id="user-types">
+                    <label class="label">User Types</label>
+                    {% render_field form.user_types %}
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6"><label class="label">First Name </label>{{ form.first_name }}</div>
+                <div class="col-md-6"><label class="label" >Last Name </label>{{ form.last_name  }}</div>
+            </div>
+            <div class="row mt-3">
+                <div class="input-group mb-3 col-md-12">
+                    <label class="label">Email</label>
+                    {% render_field form.email %}
+                </div>
+                <div class="input-group mb-3 col-md-12" id="gst-field">
+                    <label class="label">GST</label>
+                    {% render_field form.gst %}
+                </div>
+                <div class="input-group mb-3 col-md-12">
+                    <label class="label">Username</label>
+                    {% render_field form.username %}
+                </div>
+                <div class="input-group mb-3 col-md-12">
+                    <label class="label">Password</label>
+                    {% render_field form.password %}
+                </div>
+                <div class="input-group mb-3 col-md-12">
+                    <label class="label">Re-Password</label>
+                    {% render_field form.repassword %}
+                </div>
+                <div class="input-group mb-3 col-md-12">
+                    <label class="label">Mobile No.</label>
+                    {% render_field form.phone_number %}
+                </div>
+                <div class="input-group mb-3 col-md-12">
+                    <label class="label">Gender</label>
+                    {% render_field form.gender %}
+                </div>
+            </div>
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    </div>
 </div>
-<!--Script Link-->
 <link type="text/css" rel="stylesheet" href="{% static 'css/become_seller.css' %}" />
+<script src="{% static 'js/registration.js' %}"></script>
 {% endblock content %}
 

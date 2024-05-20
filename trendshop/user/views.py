@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 """This file contains class based views for user and user address model."""
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -8,9 +8,9 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from django_filters.views import FilterView
 from trendshop.views import CustomPermissionRequired
-from trendshop_website.tasks import send_welcome_email
+from user.tasks import send_welcome_email
 from user.filters import UserFilter
-from user.forms import SignupForm, ProfileForm, UserAddressForm
+from user.forms import SignupForm, ProfileForm, UserAddressForm,UserForm,UserUpdateForm
 from user.models import User, UserAddress
 from django.contrib.auth import logout
 
@@ -189,4 +189,19 @@ class UserAddressDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView)
 def logout_view(request):
     logout(request)
     return redirect("trendshop_website:home")
+
+
+def register(request, pk):
+    user = get_object_or_404(User, pk=pk)
+
+    if request.method == 'POST':
+        breakpoint()
+        form = UserUpdateForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("trendshop_website:home")
+    else:
+        form = UserUpdateForm(instance=user)
+
+    return render(request, 'become_seller.html', {'form': form})
 
