@@ -15,7 +15,7 @@
             <div class="col-md-4 offset-md-1">
                 <!-- Navigation links -->
                 <ul id="menu" class="d-flex justify-content-end mt-1"> {% if user.is_authenticated %} <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Welcome <b>{{user.username}}</b>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Welcome <b>{{user.first_name}}</b>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item logout" href="{% url 'user:logout' %}">
@@ -37,14 +37,6 @@
                     </li> {% endif %} <li>
                         <a href="">
                             <i class="fa-solid fa-cart-shopping"></i> Cart </a>
-                    </li>
-                    <li>
-                        {% if request.user.is_authenticated %}
-                        <a href="{% url 'user:registration_form' request.user.id %}"><i class="fa-regular fa-handshake"></i> Become a Seller</a>
-                        {% else %}
-                        <a href="{% url 'trendshop_website:home' %}"><i class="fa-regular fa-handshake"></i> Become a Seller</a>
-                        {% endif %}
-
                     </li>
                 </ul>
             </div>

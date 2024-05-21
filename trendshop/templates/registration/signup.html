@@ -52,6 +52,13 @@
                                 {{ error }}
                                 {% endfor %}
                                 {% endif %}
+                                <label class="label" style="color: rgba(11, 122, 114, 1)">User Types</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="user-icon2">
+                                        <i class="fa-solid fa-user" style="color: #0b7a72;"></i>
+                                    </span>
+                                    {% render_field form.user_types aria-describedby="user-icon2" %}
+                                </div>
                                 <label class="label" style="color: rgba(11, 122, 114, 1)">Username</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="user-icon">
@@ -73,6 +80,13 @@
                                     </span>
                                     {% render_field form.phone_number aria-describedby="phone-number-icon" %}
                                 </div>
+                                <label id ="gst-label" class="label" style="color: rgba(11, 122, 114, 1); display: none;">GST Number</label>
+                                <div class="input-group mb-3" id="gst-field" style="display: none;">
+                                    <span class="input-group-text" id="gst-number-icon">
+                                        <i class="fa-solid fa-bars" style="color: #0b7a72;"></i>
+                                    </span>
+                                    {% render_field form.gst aria-describedby="gst-number-icon" %}
+                                </div>
                                 <label class="label" style="color: rgba(11, 122, 114, 1)">Password</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="password-icon">
@@ -88,7 +102,7 @@
                                     {% render_field form.password2 aria-describedby="confirm-password-icon" %}
                                 </div>
                                 <br>
-                                <div class="form-group">
+                                <div  id="signup-button" class="form-group" style="display: none;">
                                     <button type="submit" class="btn btn-secondary rounded w-100"
                                         style="background-color: rgba(11, 122, 114, 1);font-weight: bold;">Signup
                                     </button>
@@ -109,6 +123,6 @@
             </div>
         </div>
     </section>
+<script src="{% static 'js/registration.js' %}"></script>
 </body>
-
 </html>

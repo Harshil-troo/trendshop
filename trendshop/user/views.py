@@ -10,7 +10,7 @@ from django_filters.views import FilterView
 from trendshop.views import CustomPermissionRequired
 from user.tasks import send_welcome_email
 from user.filters import UserFilter
-from user.forms import SignupForm, ProfileForm, UserAddressForm,UserForm,UserUpdateForm
+from user.forms import SignupForm, ProfileForm, UserAddressForm,UserForm
 from user.models import User, UserAddress
 from django.contrib.auth import logout
 
@@ -186,22 +186,11 @@ class UserAddressDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView)
             return True
 
 
-def logout_view(request):
+
+def logout_view(self,request):
     logout(request)
     return redirect("trendshop_website:home")
 
 
-def register(request, pk):
-    user = get_object_or_404(User, pk=pk)
 
-    if request.method == 'POST':
-        breakpoint()
-        form = UserUpdateForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect("trendshop_website:home")
-    else:
-        form = UserUpdateForm(instance=user)
-
-    return render(request, 'become_seller.html', {'form': form})
 

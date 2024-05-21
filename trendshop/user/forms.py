@@ -31,7 +31,7 @@ class SignupForm(UserCreationForm):
         order options,verbose_name, and a lot of other options.
         """
         model = User
-        fields = ['username', 'email', 'phone_number', 'password1', 'password2']
+        fields = ['username', 'email', 'user_types','gst','phone_number', 'password1', 'password2']
 
     def clean(self):
         """
@@ -147,12 +147,7 @@ class UserForm(forms.ModelForm):
         super(UserForm, self).__init__(*args, **kwargs)
         self.fields['gst'].required = False
 
-class UserUpdateForm(UserForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            if name != 'gst' and name != 'user_types':
-                field.disabled = True
+
 
 
 

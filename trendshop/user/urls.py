@@ -3,7 +3,7 @@ from django.contrib.auth.views import LogoutView, LoginView, PasswordResetView, 
     PasswordResetConfirmView, PasswordChangeView,PasswordChangeDoneView
 from django.conf.urls.static import static
 from user.views import SignupView, ProfileView, UserDeleteView, UserListView,\
-    UserAddressCreateView, UserAddressListView, UserAddressUpdateView, UserAddressDeleteView,logout_view,register
+    UserAddressCreateView, UserAddressListView, UserAddressUpdateView, UserAddressDeleteView,logout_view
 from user.forms import LoginForm
 from trendshop import settings
 
@@ -25,6 +25,5 @@ urlpatterns = [
     path('password/change/done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('user/delete/<int:pk>/', UserDeleteView.as_view(), name='user_delete'),
     path('user/list/', UserListView.as_view(), name='user_list'),
-    path('become-seller/<int:pk>/', register, name='registration_form'),
 
 ]
