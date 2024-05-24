@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" id="categories">
+    <h1 class="my-4">SubCategories</h1>
+    <a href="{% url 'trendshop_website:add_product' %}" class="btn btn-primary">Add Product</a>
+    <div class="row">
+        {% for subcategory in subcategories %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 custom-card">
+                    <a href="{% url 'trendshop_website:product_list' subcategory.id %}">
+                        <img class="card-img-top custom-card-img" src="{{ subcategory.image.url }}" alt="{{ subcategory.title }}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'trendshop_website:product_list' subcategory.id %}">{{ subcategory.title }}</a>
+                        </h5>
+                        <p class="card-text">{{ subcategory.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<link type="text/css" rel="stylesheet" href="{% static 'css/website.css' %}" />
+{% endblock %}

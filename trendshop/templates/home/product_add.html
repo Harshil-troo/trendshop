@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" id="add-product">
+    <h1 class="my-4">Add Product</h1>
+    <form method="post" enctype="multipart/form-data" class="my-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-success">Add Product</button>
+    </form><br>
+
+</div>
+<link type="text/css" rel="stylesheet" href="{% static 'css/website.css' %}" />
+<style>
+    /* Custom CSS */
+    .my-form {
+        /* Add your form styles here */
+        margin-top: 20px;
+    }
+    .my-form .form-group {
+        /* Add styles for the form group */
+        margin-bottom: 20px;
+    }
+    .my-form label {
+        /* Add styles for labels */
+        font-weight: bold;
+    }
+    .my-form input[type="text"],
+    .my-form textarea {
+        /* Add styles for text inputs and textareas */
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    /* Add more styles as needed */
+</style>
+{% endblock content %}

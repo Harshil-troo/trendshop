@@ -45,7 +45,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <form method="POST">
+                            <form method="POST" novalidate>
                                 {% csrf_token %}
                                 {% if form.errors %}
                                 {% for key, error in form.errors.items %}

@@ -6,26 +6,12 @@
     <div class="category-container">
         <!-- Category Item 1 -->
         <div class="category-item">
-            <img src="{% static 'images/top_offers.jpg' %}" alt="Top Offers">
-            <p>Top Offers</p>
-        </div>
-        <!-- Category Item 2 -->
-        <div class="category-item">
-            <img src="{% static 'images/mobile.jpg' %}" alt="Mobiles">
-            <p>Mobile Phones</p>
-        </div>
-        <!-- Category Item 3 -->
-        <div class="category-item">
-            <img src="{% static 'images/tv_and_appliances.jpg' %}" alt="TV Appliances">
-            <p>TV & Appliances</p>
-        </div>
-        <div class="category-item">
             <img src="{% static 'images/electronic_products.jpg' %}" alt="Electronic Products">
             <p>Electronics</p>
         </div>
         <div class="category-item">
             <img src="{% static 'images/fashion.jpg' %}" alt="Fashion">
-            <p>Fashion</p>
+            <a href="{% url 'trendshop_website:category_list' %}">Fashion</a>
         </div>
         <div class="category-item">
             <img src="{% static 'images/beauty.jpg' %}" alt="Beauty Products">
@@ -36,12 +22,26 @@
             <p>Kitchen Products</p>
         </div>
         <div class="category-item">
+            <img src="{% static 'images/fitness-equip.jpeg' %}" alt="Fitness">
+            <p>Fitness</p>
+        </div>
+        <!-- Category Item 2 -->
+        <div class="category-item">
+            <img src="{% static 'images/baby-products.jpeg' %}" alt="Baby Products">
+            <p>Baby Products</p>
+        </div>
+        <!-- Category Item 3 -->
+        <div class="category-item">
+            <img src="{% static 'images/pet-supplies.jpeg' %}" alt="Pet Supplies">
+            <p>Pet Supplies</p>
+        </div>
+        <div class="category-item">
             <img src="{% static 'images/furniture.jpg' %}" alt="Furniture Products">
             <p>Furniture</p>
         </div>
         <div class="category-item">
-            <img src="{% static 'images/travel.jpg' %}" alt="Travel">
-            <p>Travel</p>
+            <img src="{% static 'images/accessories.jpeg' %}" alt="Accessories">
+            <p>Accessories</p>
         </div>
         <div class="category-item">
             <img src="{% static 'images/groceries.jpg' %}" alt="Groceries">

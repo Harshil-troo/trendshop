@@ -23,6 +23,7 @@ class SignupForm(UserCreationForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
         self.fields['email'].required = True
+        self.fields['gst'].required = False
 
     class Meta:
         """
@@ -139,9 +140,10 @@ class UserForm(forms.ModelForm):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         repassword = cleaned_data.get("repassword")
+
         if password != repassword:
             raise forms.ValidationError("Please type the same password.")
-        return cleaned_data
+
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)

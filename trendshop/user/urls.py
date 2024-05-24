@@ -25,5 +25,9 @@ urlpatterns = [
     path('password/change/done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('user/delete/<int:pk>/', UserDeleteView.as_view(), name='user_delete'),
     path('user/list/', UserListView.as_view(), name='user_list'),
+    path('user-address/create/', UserAddressCreateView.as_view(), name='address_create'),
+    path('user-address/list/', UserAddressListView.as_view(), name='address_list'),
+    path('user-address/update/<int:pk>/', UserAddressUpdateView.as_view(), name='address_update'),
+    path('user-address/delete/<int:pk>/', UserAddressDeleteView.as_view(), name='address_delete'),
 
 ]

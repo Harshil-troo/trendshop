@@ -184,10 +184,10 @@ class UserAddressDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView)
         instance = self.get_object()
         if instance.user.id == self.request.user.id:
             return True
+3
 
 
-
-def logout_view(self,request):
+def logout_view(request):
     logout(request)
     return redirect("trendshop_website:home")
 
