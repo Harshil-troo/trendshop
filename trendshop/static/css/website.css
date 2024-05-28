@@ -181,8 +181,10 @@ a{
 }
 
 a {
-    font-size: 1.10rem;
-    text-decoration: none;
+    font-size: 0.80rem;
+    margin: auto auto;
+
+
 }
 
 a:hover {
@@ -195,5 +197,5 @@ a:hover {
     color: #555;
 }
 #product-list .btn {
-    margin: 10px 0;
+    margin: 10px 12px;
 }

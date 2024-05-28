@@ -2,8 +2,11 @@
 {% load static %}
 {% block content %}
 <div class="container" id="categories">
-    <h1 class="my-4">SubCategories</h1>
-    <a href="{% url 'trendshop_website:add_product' %}" class="btn btn-primary">Add Product</a>
+    <h1 class="my-4">Subcategories</h1>
+    {% if user.is_authenticated and user.user_types == "seller" %}
+    <a href="{% url 'trendshop_website:add_product' %}" class="btn btn-outline-primary">Add Product</a>
+    <a href="{% url 'trendshop_website:add_category' %}" class="btn btn-outline-primary">Add Subcategories</a>
+    {% endif %}
     <div class="row">
         {% for subcategory in subcategories %}
             <div class="col-md-4 mb-4">

@@ -1,54 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <!-- <div class="row"> -->
+ <div class="row">
 <div class="container">
     <div class="category-container">
+        {% for subcategory in subcategories %}
         <!-- Category Item 1 -->
         <div class="category-item">
-            <img src="{% static 'images/electronic_products.jpg' %}" alt="Electronic Products">
-            <p>Electronics</p>
+            <img src="{{ subcategory.image.url}}" alt="{{ subcategory.title }}">
+             <a href="{% url 'trendshop_website:subcategory_list' subcategory.id %}">{{ subcategory.title }}</a>
         </div>
-        <div class="category-item">
-            <img src="{% static 'images/fashion.jpg' %}" alt="Fashion">
-            <a href="{% url 'trendshop_website:category_list' %}">Fashion</a>
-        </div>
-        <div class="category-item">
-            <img src="{% static 'images/beauty.jpg' %}" alt="Beauty Products">
-            <p>Beauty Products</p>
-        </div>
-        <div class="category-item">
-            <img src="{% static 'images/kitchen.jpg' %}" alt="Kitchen Products">
-            <p>Kitchen Products</p>
-        </div>
-        <div class="category-item">
-            <img src="{% static 'images/fitness-equip.jpeg' %}" alt="Fitness">
-            <p>Fitness</p>
-        </div>
-        <!-- Category Item 2 -->
-        <div class="category-item">
-            <img src="{% static 'images/baby-products.jpeg' %}" alt="Baby Products">
-            <p>Baby Products</p>
-        </div>
-        <!-- Category Item 3 -->
-        <div class="category-item">
-            <img src="{% static 'images/pet-supplies.jpeg' %}" alt="Pet Supplies">
-            <p>Pet Supplies</p>
-        </div>
-        <div class="category-item">
-            <img src="{% static 'images/furniture.jpg' %}" alt="Furniture Products">
-            <p>Furniture</p>
-        </div>
-        <div class="category-item">
-            <img src="{% static 'images/accessories.jpeg' %}" alt="Accessories">
-            <p>Accessories</p>
-        </div>
-        <div class="category-item">
-            <img src="{% static 'images/groceries.jpg' %}" alt="Groceries">
-            <p>Groceries</p>
-        </div>
+        {% endfor %}
     </div>
 </div>
+
 <!--    Carousel-->
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -61,10 +26,10 @@
             <img class="d-block w-100" src="{% static 'images/carousel_1.webp' %}" alt="First slide">
         </div>
         <div class="carousel-item" >
-            <img class="d-block w-100" src="{% static 'images/carousel_2.webp' %}"  alt="Second slide">
+            <a href="{% url 'trendshop_website:product_list' 19 %}"><img class="d-block w-100" src="{% static 'images/carousel_2.webp' %}"  alt="Second slide"></a>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="{% static 'images/carousel_3.webp' %}"  alt="Third slide">
+            <a href="{% url 'trendshop_website:product_list' 11 %}"><img class="d-block w-100" src="{% static 'images/carousel_3.webp' %}"  alt="Third slide"></a>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -80,8 +45,9 @@
     <div class="row">
         <div class="card" style="width: 9rem;">
             <div class="card-body">
-                <img src="{% static 'images/vivo_T3X.webp' %}"  alt="" height="145" width="113">
+                <a href="{% url 'trendshop_website:product_list' 11 %}"><img src="{% static 'images/vivo_T3X.webp' %}"  alt="" height="145" width="113"></a>
                 <div class="card-text-container">
+
                     <p style="text-align: center">Vivo T3X 5G</p>
                     <p style="text-align: center"><b>From ₹12,499</b></p>
                 </div>
@@ -89,7 +55,7 @@
         </div>
         <div class="card" style="width: 9rem;">
             <div class="card-body">
-                <img src="{% static 'images/motorola_edge.webp' %}" alt="" height="145" width="113">
+                <a href="{% url 'trendshop_website:product_list' 11 %}"><img src="{% static 'images/motorola_edge.webp' %}" alt="" height="145" width="113"></a>
                 <div class="card-text-container">
                     <p style="text-align: center">Motorola Pro</p>
                     <p style="text-align: center"><b>From ₹27,999</b></p>
@@ -98,7 +64,7 @@
         </div>
         <div class="card" style="width: 9rem;">
             <div class="card-body">
-                <img src="{% static 'images/galaxy_f15.webp' %}" alt="" height="145" width="113">
+                <a href="{% url 'trendshop_website:product_list' 11 %}"><img src="{% static 'images/galaxy_f15.webp' %}" alt="" height="145" width="113"></a>
                 <div class="card-text-container">
                     <p style="text-align: center">Galaxy F15 </p>
                     <p style="text-align: center"><b>From ₹10,999</b></p>
@@ -107,7 +73,7 @@
         </div>
          <div class="card" style="width: 9rem;">
             <div class="card-body">
-                <img src="{% static 'images/realme_p1.webp' %}" alt="" height="145" width="113">
+                <a href="{% url 'trendshop_website:product_list' 11 %}"><img src="{% static 'images/realme_p1.webp' %}" alt="" height="145" width="113"></a>
                 <div class="card-text-container">
                     <p style="text-align: center">Realme P1</p>
                     <p style="text-align: center"><b>From ₹15,999</b></p>
@@ -116,7 +82,7 @@
         </div>
          <div class="card" style="width: 9rem;">
             <div class="card-body">
-                <img src="{% static 'images/moto_g34.webp' %}" alt="" height="145" width="113">
+                <a href="{% url 'trendshop_website:product_list' 11 %}"><img src="{% static 'images/moto_g34.webp' %}" alt="" height="145" width="113"></a>
                 <div class="card-text-container">
                     <p style="text-align: center">Moto G34</p>
                     <p style="text-align: center"><b>From ₹11,999</b></p>
@@ -125,7 +91,7 @@
         </div>
          <div class="card" style="width: 9rem;">
             <div class="card-body">
-                <img src="{% static 'images/poco.webp' %}" alt="" height="145" width="113">
+                <a href="{% url 'trendshop_website:product_list' 11 %}"><img src="{% static 'images/poco.webp' %}" alt="" height="145" width="113"></a>
                 <div class="card-text-container">
                     <p style="text-align: center">Poco M6 Pro</p>
                     <p style="text-align: center"><b>From ₹9,999</b></p>
@@ -140,13 +106,13 @@
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="{% static 'images/featured4.webp' %}" class="d-block w-100" alt="First Slide">
+                        <a href="{% url 'trendshop_website:product_list' 32 %}"><img src="{% static 'images/featured4.webp' %}" class="d-block w-100" alt="First Slide"></a>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'images/featured5.webp' %}" class="d-block w-100" alt="Second Slide">
+                        <a href="{% url 'trendshop_website:product_list' 34 %}"><img src="{% static 'images/featured5.webp' %}" class="d-block w-100" alt="Second Slide"></a>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'images/featured6.webp' %}" class="d-block w-100" alt="Third Slide">
+                        <a href="{% url 'trendshop_website:product_list' 17 %}"><img src="{% static 'images/featured6.webp' %}" class="d-block w-100" alt="Third Slide"></a>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -161,13 +127,13 @@
          <div id="carouselExampleControls2" class="carousel slide" data-ride="carousel" data-interval="3000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="{% static 'images/featured1.webp' %}" class="d-block w-100 h-auto" alt="First Slide">
+                        <a href="{% url 'trendshop_website:subcategory_list' 2 %}"><img src="{% static 'images/featured1.webp' %}" class="d-block w-100 h-auto" alt="First Slide"></a>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'images/featured2.webp' %}" class="d-block w-100" alt="Second Slide">
+                        <a href="{% url 'trendshop_website:subcategory_list' 3 %}"><img src="{% static 'images/featured2.webp' %}" class="d-block w-100" alt="Second Slide"></a>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'images/featured3.webp' %}" class="d-block w-100" alt="Third Slide">
+                        <a href="{% url 'trendshop_website:product_list' 33 %}"><img src="{% static 'images/featured3.webp' %}" class="d-block w-100" alt="Third Slide"></a>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -182,13 +148,13 @@
         <div id="carouselExampleControls3" class="carousel slide" data-ride="carousel" data-interval="3000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="{% static 'images/featured7.webp' %}" class="d-block w-100" alt="First Slide">
+                        <a href="{% url 'trendshop_website:subcategory_list' 5 %}"><img src="{% static 'images/featured7.webp' %}" class="d-block w-100" alt="First Slide"></a>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'images/featured8.webp' %}" class="d-block w-100" alt="Second Slide">
+                        <a href="{% url 'trendshop_website:subcategory_list' 10 %}"><img src="{% static 'images/featured8.webp' %}" class="d-block w-100" alt="Second Slide"></a>
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'images/featured9.webp' %}" class="d-block w-100" alt="Third Slide">
+                        <a href="{% url 'trendshop_website:subcategory_list' 5 %}"><img src="{% static 'images/featured9.webp' %}" class="d-block w-100" alt="Third Slide"></a>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
