@@ -53,19 +53,35 @@ def add_product(request):
     return render(request, 'home/product_add.html', {'form': form})
 
 
-class ProductUpdateView(LoginRequiredMixin, CustomPermissionRequired, UpdateView):
-    """
-    This class will update food.
-    """
-    model = Product
-    form_class = ProductsForm
-    template_name = 'home/product_add.html'
-    success_url = reverse_lazy('trendshop_website:product_update')
+def product_update(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    form = ProductsForm(instance=product)
+    subcategory = product.categories.first()
+    if subcategory:
+        subcategory_id = subcategory.id
+    else:
+        subcategory_id = None
+    if request.method == 'POST':
+        form = ProductsForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('trendshop_website:product_list', subcategory_id=subcategory_id)
+    return render(request, 'home/product_update.html', {'form': form, 'product': product})
 
 
-class ProductDeleteView(LoginRequiredMixin, CustomPermissionRequired, DeleteView):
-    """
-    This class will delete food.
-    """
-    model = Product
-    success_url = reverse_lazy('trendshop_website:product_delete')
+def product_delete(request,product_id):
+    product = get_object_or_404(Product, id=product_id)
+    subcategory = product.categories.first()
+    if subcategory:
+        subcategory_id = subcategory.id
+    else:
+        subcategory_id = None
+    product.delete()
+    if subcategory_id:
+        return redirect('trendshop_website:product_list', subcategory_id=subcategory_id)
+    else:
+        return redirect('trendshop_website:category_list')
+
+def product_details(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'home/product_detail.html', {"product":product})

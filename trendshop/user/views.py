@@ -13,7 +13,10 @@ from user.filters import UserFilter
 from user.forms import SignupForm, ProfileForm, UserAddressForm,UserForm
 from user.models import User, UserAddress
 from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView, PasswordResetView, \
+    PasswordResetConfirmView, PasswordChangeView, PasswordChangeDoneView, PasswordResetCompleteView
 
+from django.utils.translation import gettext_lazy as _
 
 
 
@@ -192,5 +195,31 @@ def logout_view(request):
     return redirect("trendshop_website:home")
 
 
+class CustomLoginView(LoginView):
+    template_name = "registration/login.html"
 
+class CustomPasswordResetView(PasswordResetView):
+    email_template_name = "registration/password_reset_email.html"
+    subject_template_name = "registration/password_reset_subject.txt"
+    success_url = reverse_lazy("trendshop_website:password_reset_done")
+    template_name = "registration/password_reset_form.html"
+    title = _("Password reset")
 
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    reset_url_token = "set-password"
+    success_url = reverse_lazy("password_reset_complete")
+    template_name = "registration/password_reset_confirm.html"
+    title = _("Enter new password")
+
+class CustomPasswordChangeView(PasswordChangeView):
+    success_url = reverse_lazy("trendshop_website:password_change_done")
+    template_name = "registration/password_change_form.html"
+    title = _("Password change")
+
+class CustomPasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = "registration/password_change_done.html"
+    title = _("Password change successful")
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = "registration/password_reset_complete.html"
+    title = _("Password reset complete")

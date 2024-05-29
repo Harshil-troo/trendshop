@@ -167,6 +167,7 @@ a{
     transition: transform 0.2s;
     width: 100%;
     height: auto;
+    justify-content: space-evenly;
 }
 
 .custom-card:hover {
@@ -181,15 +182,17 @@ a{
 }
 
 a {
-    font-size: 0.80rem;
+    font-size: 1.15rem;
     margin: auto auto;
-
+    color: rgba(11, 122, 114, 1);
 
 }
 
 a:hover {
     font-weight: bold;
     text-decoration: none;
+    color: rgba(11, 122, 114, 1);
+
 }
 
 .custom-card-text {
@@ -198,4 +201,15 @@ a:hover {
 }
 #product-list .btn {
     margin: 10px 12px;
+}
+
+#category-item a{
+    font-size: 0.80rem;
+    color: rgba(11, 122, 114, 1);
+}
+
+#category-item a:hover{
+    font-weight: bold;
+    text-decoration: none;
+    color: rgba(11, 122, 114, 1);
 }

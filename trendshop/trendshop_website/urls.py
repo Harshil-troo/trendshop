@@ -1,7 +1,7 @@
 from django.urls import path,include
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetCompleteView
 from . import views
-from .views import ProductDeleteView, ProductUpdateView
+
 
 app_name = 'trendshop_website'
 
@@ -15,6 +15,8 @@ urlpatterns = [
     path('subcategory/<int:subcategory_id>/products/', views.product_view, name='product_list'),
     path('add/product/', views.add_product, name='add_product'),
     path('add/category/', views.add_category, name='add_category'),
-    path('subcategory/<int:subcategory_id>/products/update/<int:pk>/', ProductUpdateView.as_view(), name='product_update'),
-    path('subcategory/<int:subcategory_id>/products/delete/<int:pk>/', ProductDeleteView.as_view(), name='product_delete')
+    path('products/update/<int:product_id>/', views.product_update, name='product_update'),
+    path('products/delete/<int:product_id>/', views.product_delete, name='product_delete'),
+    path('product/<int:product_id>/', views.product_details, name='product_details')
+
 ]
