@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% for cart in carts %}
+{% if cart.carts.all %}
+<div class="card">
+    <div class="row">
+        <div class="col-md-12 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col"><h3 style="color: rgba(11, 122, 114, 1)">CART DETAILS</h3></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row main align-items-center">
+                    <div class="col-2">
+                        <h5 style="color: rgba(11, 122, 114, 1)"></h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)">Food Item</h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)">Price</h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)">Quantity</h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)">Subtotal</h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)"></h5>
+                    </div>
+                </div>
+            </div>
+            {% for item in cart.carts.all %}
+            <div class="row border-top">
+                <div class="row main align-items-center">
+                    <div class="col-2">
+                        <img class="img-fluid" src="{{ item.item.image.url }}" alt="Food Image"
+                             style="width: 100px; height: 100px"/>
+                    </div>
+                    <div class="col">
+                        <p class="mb-1" style="font-size: 20px;">{{ item.item.name }}</p>
+                    </div>
+                    <div class="col">
+                        <div class="row"><b>₹ {{ item.item.price }}</b></div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3" style="max-width:85px">
+                            <div>
+                                <i class="fa-solid fa-minus fa-lg text-secondary" id="decreaseQuantity"
+                                   onclick="location.href='{% url 'foodmania_website:decrease_quantity' item.id %}'">
+                                </i>
+                                &nbsp;
+                                <b id="quantity">{{ item.quantity }}</b>
+                                &nbsp;
+                                <i class="fa fa-plus fa-lg" id="increaseQuantity" style="color: rgba(11, 122, 114, 1)"
+                                   onclick="location.href='{% url 'foodmania_website:increase_quantity' item.id %}'">
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        ₹ {{ item.sub_total }}
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'foodmania_website:remove_from_cart' item.id %}">
+                            <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br>
+<div class="card mb-5">
+    <div class="card-body p-4">
+        <div class="float-end">
+            <p class="mb-0 me-5 d-flex align-items-center">
+                <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">Cart Total:&nbsp;</span>
+                <span class="lead fw-normal">₹ {{ cart.cart_total }}</span>
+            </p>
+        </div>
+    </div>
+</div>
+<div style="display: flex; justify-content:flex-end">
+    <div style="display: flex; justify-content:flex-end">
+        <a class="btn btn-tertiary" href="{% url 'foodmania:food_list' %}"
+           style="margin-right: 10px;color: rgba(11, 122, 114, 1)">Add Food Items</a>
+        <a class="btn btn-primary" href="{% url 'foodmania_website:checkout' %}">Proceed to Checkout</a>
+    </div>
+</div>
+<br>
+{% else %}
+<div class="card mb-5">
+    <div class="card-body p-4">
+        <div style="margin: auto">
+            <p class="mb-0 me-5">
+                <span>
+                    <strong style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;margin: auto">
+                        There are no items in your cart.
+                    </strong>
+                    <a class="btn btn-primary" href="{% url 'foodmania:food_list' %}"
+                       style="margin-right: 10px;">Add Food Items</a>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endif %}
+{% endfor %}
+
+<link type="text/css" rel="stylesheet" href="{% static 'css/cart.css' %}"/>
+<link type="text/css" rel="stylesheet" href="{% static 'css/select2.css' %}"/>
+<script src="{% static 'js/modal_select2.js' %}"></script>
+<script src="{% static 'js/toast.js' %}"></script>
+{% endblock content %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}

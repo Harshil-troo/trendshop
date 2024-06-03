@@ -4,7 +4,7 @@
 
 <!--User Address List-->
 {% if addresses %}
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 10px;">
     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
             data-bs-target="#exampleModal"><i class="fa fa-plus fa-lg"></i>
         Add Address
@@ -22,8 +22,8 @@
     </div>
     <div class="card-footer">
         <div class="d-flex">
-            <a class="btn btn-outline-primary w-100" href="{% url 'user:address_update' address.id %}">Edit address</a>
-            <a class="btn btn-outline-danger w-100" href="{% url 'user:address_delete' address.id %}"
+            <a class="btn btn-outline-primary w-100" style="margin-right: 10px;" href="{% url 'user:address_update' address.id %}">Edit address</a>
+            <a class="btn btn-outline-danger w-100" style="margin-left: 10px;"  href="{% url 'user:address_delete' address.id %}"
                 data-bs-toggle="modal" data-bs-target="#DeleteModal{{ address.id }}">Delete</a>
         </div>
     </div>
@@ -58,7 +58,7 @@
 <br>
 <br>
 {% else %}
-<div class="card mb-5">
+<div class="card mb-5" style="margin-top: 10px;">
     <div class="card-body p-4">
         <div style="margin: auto">
             <p class="mb-0 me-5">
@@ -99,8 +99,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Create Address</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close">
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
+                    aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -115,7 +115,7 @@
                     {{ form.as_p }}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Close
+                                data-bs-dismiss="modal">Cancel
                         </button>
                         <button type="submit" id="success" class="btn btn-success">Create</button>
                     </div>

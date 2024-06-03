@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+{% for cart in carts %}
+{% if cart.carts.all %}
+<form method="POST" action="{% url 'foodmania_website:payment' %}">
+    <div class="card">
+        <div class="row">
+            <div class="col-md-12 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col">
+                            <h3 style="color: rgba(11, 122, 114, 1);">CHOOSE DELIVERY ADDRESS</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                            {% for key, error in form.errors.items %}
+                            {{ error }}
+                            {% endfor %}
+                            {% endif %}
+                            {% render_field form.delivery_address %}
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-primary" href="{% url 'user:address_create' %}">Create new address</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-12 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h3 style="color: rgba(11, 122, 114, 1)">ORDER DETAILS</h3></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col-2">
+                            <h5 style="color: rgba(11, 122, 114, 1)"></h5>
+                        </div>
+                        <div class="col">
+                            <h5 style="color: rgba(11, 122, 114, 1)">Food Item</h5>
+                        </div>
+                        <div class="col">
+                            <h5 style="color: rgba(11, 122, 114, 1)">Price</h5>
+                        </div>
+                        <div class="col">
+                            <h5 style="color: rgba(11, 122, 114, 1)">Quantity</h5>
+                        </div>
+                        <div class="col">
+                            <h5 style="color: rgba(11, 122, 114, 1)">Subtotal</h5>
+                        </div>
+                    </div>
+                </div>
+                {% for item in cart.carts.all %}
+                <div class="row border-top">
+                    <div class="row main align-items-center">
+                        <div class="col-2">
+                            <img class="img-fluid" src="{{ item.item.image.url }}" alt="Food Image"
+                                 style="width: 100px; height: 100px"/>
+                        </div>
+                        <div class="col">
+                            <p class="mb-1" style="font-size: 20px;">{{ item.item.name }}</p>
+                        </div>
+                        <div class="col">
+                            <div class="row"><b>₹ {{ item.item.price }}</b></div>
+                        </div>
+                        <div class="col">
+                            {{ item.quantity }}
+                        </div>
+                        <div class="col">
+                            ₹ {{ item.sub_total }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-12 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col">
+                            <h3 style="color: rgba(11, 122, 114, 1);">ADD INSTRUCTIONS: (OPTIONAL)</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col">
+                        <textarea name="instructions" rows="3" placeholder="Enter Instructions"
+                                  style="min-width: 100%">
+                        </textarea>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-12 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col">
+                            <h3 style="color: rgba(11, 122, 114, 1);">ORDER SUMMARY</h3>
+                        </div>
+                    </div>
+                </div>
+                {% for cart in carts %}
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col">
+                            <p class="mb-0 me-5 d-flex align-items-center">
+                                <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
+                                    Cart Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </span>
+                                <span class="lead fw-bold">₹ {{ cart.cart_total }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col">
+                            <p class="mb-0 me-5 d-flex align-items-center">
+                                <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
+                                    Tax:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </span>
+                                <span class="lead fw-bold">₹ {{ cart.total_tax }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col">
+                            <p class="mb-0 me-5 d-flex align-items-center">
+                                <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
+                                    Delivery Charges:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </span>
+                                {% if cart.delivery_charges == 0 %}
+                                <span class="lead fw-bold" style="color: rgba(11, 122, 114, 1)">Free</span>
+                                {% else %}
+                                <span class="lead fw-bold">₹ {{ cart.delivery_charges }}</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col">
+                            <p class="mb-0 me-5 d-flex align-items-center">
+                                <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
+                                    Total Amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </span>
+                                <span class="lead fw-bold">₹ {{ cart.order_total }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div style="display: flex; justify-content:flex-end">
+        <div style="display: flex; justify-content:flex-end">
+            <a class="btn btn-tertiary" href="{% url 'foodmania:food_list' %}"
+               style="margin-right: 10px;color: rgba(11, 122, 114, 1)">Add Food Items</a>
+            <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+        </div>
+    </div>
+    <br>
+</form>
+{% else %}
+<div class="card mb-5">
+    <div class="card-body p-4">
+        <div style="margin: auto">
+            <p class="mb-0 me-5">
+                <span>
+                    <strong style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;margin: auto">
+                        There are no items in your cart.
+                    </strong>
+                    <a class="btn btn-primary" href="{% url 'foodmania:food_list' %}"
+                       style="margin-right: 10px;">Add Food Items</a>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endif %}
+{% endfor %}
+
+<link type="text/css" rel="stylesheet" href="{% static 'css/cart.css' %}"/>
+<link type="text/css" rel="stylesheet" href="{% static 'css/select2.css' %}"/>
+<script src="{% static 'js/select2.js' %}"></script>
+{% endblock content %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}

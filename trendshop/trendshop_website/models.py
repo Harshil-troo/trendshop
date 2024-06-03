@@ -9,6 +9,9 @@ class Category(TitleDescriptionModel):
     parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='category', null=True, blank=True)
     image = models.ImageField(upload_to='uploaded_image/', default="product_images/default-product-image.jpg")
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+
 
     def __str__(self):
         return self.title

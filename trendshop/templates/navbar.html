@@ -38,6 +38,8 @@
                                 <i class="fa-solid fa-basket-shopping"></i> Orders </a>
                             <a class="dropdown-item" href="{% url 'user:profile' user.id %}">
                                 <i class="fa-regular fa-circle-user"></i> My Profile </a>
+                            <a class="dropdown-item" href="{% url 'user:address_list' %}">
+                                <i class="fa-regular fa-address-book"></i> My Addresses</a>
                             {% if user.is_superuser or user.is_staff %}
                             <a class="dropdown-item" href="{% url 'admin:index' %}">
                             <i class="fa-solid fa-globe"></i> Admin Site</a>

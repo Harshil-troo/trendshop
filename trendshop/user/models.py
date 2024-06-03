@@ -80,4 +80,4 @@ class UserAddress(models.Model):
         """
         The method allows us to convert an object into a string representation.
         """
-        return f"{self.type} - {self.address}"
+        return f"{self.user} - {self.type}"
