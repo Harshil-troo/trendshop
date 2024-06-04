@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="card mb-5">
+    <div class="card-body p-4">
+        <div style="margin: auto">
+            <p class="mb-0 me-5">
+                <span>
+                    {% if order.status == 'Pending' %}
+                    <strong class="text-primary" style="font-size: 20px;font-weight: bold;margin: auto">
+                        Your Order is Pending.
+                    </strong>
+                    {% elif order.status == 'Confirmed' %}
+                    <strong class="text-secondary" style="font-size: 20px;font-weight: bold;margin: auto">
+                        Your Order is Confirmed.
+                    </strong>
+                    {% elif order.status == 'Delivered' %}
+                    <strong class="text-success" style="font-size: 20px;font-weight: bold;margin: auto">
+                        Your Order is Delivered.
+                    </strong>
+                    {% elif order.status == 'Deleted' %}
+                    <strong class="text-danger" style="font-size: 20px;font-weight: bold;margin: auto">
+                        Your Order is Refunded.
+                    </strong>
+                    {% elif order.status == 'Cancelled' %}
+                    <strong class="text-warning" style="font-size: 20px;font-weight: bold;margin: auto">
+                        Your Order is Canceled.
+                    </strong>
+                    {% endif %}
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+{% if user.is_superuser or user.is_staff %}
+{% if order.status == 'Deleted' %}
+{% else %}
+<div class="card mb-5">
+    <div class="card-body p-4">
+        <div style="margin: auto">
+            <div class="title">
+                <div class="row">
+                    <div class="col"><h3 style="color: rgba(11, 122, 114, 1)">CHANGE ORDER STATUS</h3></div>
+                </div>
+            </div>
+            <p class="mb-0 me-5">
+            <span>
+                <strong style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;margin: auto">
+                    Change status to
+                </strong>
+                {% if order.status == 'Delivered' %}
+                <a class="btn btn-danger" href="{% url 'foodmania_website:refunded_status' order.id %}">Refunded</a>
+                {% elif order.status == 'Deleted' %}
+                {% else %}
+                <a class="btn btn-success" href="{% url 'foodmania_website:delivered_status' order.id %}">Delivered</a>
+                <a class="btn btn-danger" href="{% url 'foodmania_website:refunded_status' order.id %}">Refunded</a>
+                {% endif %}
+            </span>
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+<div class="card">
+    <div class="row">
+        <div class="col-md-12 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h3 style="color: rgba(11, 122, 114, 1);">ORDER SUMMARY</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row main align-items-center">
+                    <div class="col">
+                        <p class="mb-0 me-5 d-flex align-items-center">
+                            <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
+                                Order ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <span class="lead fw-bold text-secondary">{{ order.order }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% if user.is_superuser or user.is_staff %}
+            <div class="row">
+                <div class="row main align-items-center">
+                    <div class="col">
+                        <p class="mb-0 me-5 d-flex align-items-center">
+                            <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
+                                User:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;
+                            </span>
+                            <span class="lead fw-bold text-secondary">{{ order.user }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="row main align-items-center">
+                    <div class="col">
+                        <p class="mb-0 me-5 d-flex align-items-center">
+                            <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
+                                Order Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;
+                            </span>
+                            <span class="lead fw-bold text-secondary">{{ order.created.date }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row main align-items-center">
+                    <div class="col">
+                        <p class="mb-0 me-5 d-flex align-items-center">
+                            <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
+                                Order Amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <span class="lead fw-bold text-secondary">₹ {{ order.total_amount }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="row">
+        <div class="col-md-12 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col"><h3 style="color: rgba(11, 122, 114, 1)">ORDER ITEMS</h3></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row main align-items-center">
+                    <div class="col-2">
+                        <h5 style="color: rgba(11, 122, 114, 1)"></h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)">Food Item</h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)">Price</h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)">Quantity</h5>
+                    </div>
+                    <div class="col">
+                        <h5 style="color: rgba(11, 122, 114, 1)">Subtotal</h5>
+                    </div>
+                </div>
+            </div>
+            {% for item in order.cart.carts.all %}
+            <div class="row border-top">
+                <div class="row main align-items-center">
+                    <div class="col-2">
+                        <img class="img-fluid" src="{{ item.item.image.url }}" alt="Food Image"
+                             style="width: 100px; height: 100px"/>
+                    </div>
+                    <div class="col">
+                        <p class="mb-1 fw-bold" style="font-size: 20px;">{{ item.item.name }}</p>
+                    </div>
+                    <div class="col">
+                        <div class="row fw-bold">₹ {{ item.item.price }}</div>
+                    </div>
+                    <div class="col fw-bold">
+                        {{ item.quantity }}
+                    </div>
+                    <div class="col fw-bold">
+                        ₹ {{ item.sub_total }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="row">
+        <div class="col-md-12 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h3 style="color: rgba(11, 122, 114, 1);">DELIVERY ADDRESS</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row main align-items-center">
+                    <div class="col">
+                        <p class="mb-0 me-5 d-flex align-items-center">
+                            <span class="lead fw-bold text-secondary">{{ order.delivery_address }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<link type="text/css" rel="stylesheet" href="{% static 'css/cart.css' %}"/>
+{% endblock content %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}

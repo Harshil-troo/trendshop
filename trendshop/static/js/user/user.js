@@ -20,6 +20,7 @@ function getResponseForProfileUpdate() {
 }
 
 function getResponseForAddressUpdate() {
+    breakpoint()
     getToasterMessage("success", "Address Updated Successfully");
     setTimeout(function() {
     $("#updateAddress").submit();

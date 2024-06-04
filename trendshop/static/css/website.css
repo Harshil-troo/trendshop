@@ -213,3 +213,7 @@ a:hover {
     text-decoration: none;
     color: rgba(11, 122, 114, 1);
 }
+
+#carouselExampleIndicators{
+    margin: 0px 12px 0px 12px;
+}

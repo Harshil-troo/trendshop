@@ -18,7 +18,7 @@
     color: rgba(11, 122, 114, 0.2);
 }
 
-.col-md-4 {
+.col-md-2 {
     width: 33.333333333333333333%;
 }
 
@@ -35,6 +35,8 @@
     padding: 8px 10px;
     display: inline-block;
     transition: color 0.3s ease;
+  font-size: 0.875em; /* 14px/16=0.875em */
+
 }
 input#searchbar{
     border-radius: 50px;
@@ -63,6 +65,8 @@ input#searchbar{
     display: inline-block;
     transition: color 0.3s ease;
     width: max-content;
+    font-size: 0.875em; /* 14px/16=0.875em */
+
 }
 
 #userlist li a:hover {

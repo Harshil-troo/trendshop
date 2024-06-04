@@ -20,8 +20,13 @@
                 <div class="product-actions">
                     {% if user.is_authenticated and user.user_types == "buyer" %}
                             <a class="btn btn-outline-danger" href='#'>Buy Now</a>
-                            <a class="btn btn-outline-primary" href='#'>Add to Cart</a>
-                        {% elif user.is_authenticated and user.user_types == "seller" %}
+                            <form action="{% url 'trendshop_website:add_to_cart' item.id %}" method="POST"
+                                class="add-to-cart-form" id="addToCart">
+                                {% csrf_token %}
+                                {{ add_to_cart.as_p }}
+                                <button type="submit" class="btn btn-outline-primary">Add To Cart</button>
+                            </form>
+                    {% elif user.is_authenticated and user.user_types == "seller" %}
                             <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                 data-bs-target="#editModal{{ product.id }}"><i class="fa fa-edit fa-lg"></i> Edit
                             </button>
@@ -46,7 +51,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title fs-5">Delete Product</h3>
-               <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
+               <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                     aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -75,7 +80,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="editModalLabel">Edit Product</h3>
-                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                 aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
             </div>
