@@ -34,7 +34,7 @@ class SignupView(CreateView):
     This class will create new user instance.
     """
     form_class = SignupForm
-    template_name = 'registration/signup.html'
+    template_name = 'user/signup.html'
     success_url = reverse_lazy('user:login')
 
     def post(self, request, *args, **kwargs):
@@ -56,7 +56,7 @@ class ProfileView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     """
     model = User
     form_class = ProfileForm
-    template_name = 'admin/user/profile.html'
+    template_name = 'user/profile.html'
 
     def get_success_url(self):
         pk = self.kwargs['pk']
@@ -93,7 +93,7 @@ class UserListView(LoginRequiredMixin, CustomPermissionRequired, FilterView):
     This class will return a list of all users only if user is superuser.
     """
     model = User
-    template_name = 'admin/user/user_list.html'
+    template_name = 'user/user_list.html'
     context_object_name = 'users'
     filterset_class = UserFilter
 
@@ -115,7 +115,7 @@ class UserAddressCreateView(CreateView):
     This class will create user address.
     """
     form_class = UserAddressForm
-    template_name = 'admin/user_address/user_address_create.html'
+    template_name = 'user/user_address_list.html'
     success_url = reverse_lazy('user:address_list')
 
     def post(self, request, *args, **kwargs):
@@ -136,7 +136,7 @@ class UserAddressListView(LoginRequiredMixin, ListView):
     This class will return a list of addresses of specific user if user is authenticated.
     """
     model = UserAddress
-    template_name = 'admin/user_address/user_address_list.html'
+    template_name = 'user/user_address_list.html'
     context_object_name = 'addresses'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -160,7 +160,7 @@ class UserAddressUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView)
     """
     model = UserAddress
     form_class = UserAddressForm
-    template_name = 'admin/user_address/user_address_create.html'
+    template_name = 'user/user_address_update.html'
     success_url = reverse_lazy('user:address_list')
 
     def test_func(self):

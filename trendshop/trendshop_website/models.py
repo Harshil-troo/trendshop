@@ -56,23 +56,26 @@ class Cart(TimeStampedModel):
 
     @property
     def total_tax(self):
-        return round(self.cart_total * (18 / 100), 2)
+        result = float(self.cart_total) * 18/100
+        return result
 
     @property
     def delivery_charges(self):
-        if self.cart_total >= 500:
+        if self.cart_total >= 5000:
             return 0
-        return 50
+        return 99
 
     @property
     def order_total(self):
-        return self.cart_total + self.total_tax + self.delivery_charges
+        bill = float(self.cart_total) + float(self.total_tax) + float(self.delivery_charges)
+        return bill
 
 
 class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='users')
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True, related_name='carts')
     item = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='selected_items')
-    quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"ID: {self.id}, Product_ID: {self.cart}, Product_item: {self.item}, Quantity: {self.quantity}"

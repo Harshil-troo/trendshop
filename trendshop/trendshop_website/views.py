@@ -28,17 +28,17 @@ def home(request):
 
 def category_view(request):
     parent_category = Category.objects.filter(parent__isnull=True)
-    return render(request, 'home/category_list.html', {'categories': parent_category})
+    return render(request, 'trendshop_website/category_list.html', {'categories': parent_category})
 
 def subcategory_view(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     subcategory = Category.objects.filter(parent=category)
-    return render(request, 'home/subcategory_list.html', {'categories': category,'subcategories': subcategory})
+    return render(request, 'trendshop_website/subcategory_list.html', {'categories': category,'subcategories': subcategory})
 
 def product_view(request, subcategory_id):
     subcategory = get_object_or_404(Category, id=subcategory_id)
     products = Product.objects.filter(categories=subcategory)
-    return render(request, 'home/product_list.html', {'subcategory': subcategory, 'products': products})
+    return render(request, 'trendshop_website/product_list.html', {'subcategory': subcategory, 'products': products})
 
 @login_required
 @user_passes_test(is_seller)
@@ -50,7 +50,7 @@ def add_category(request):
             return redirect('trendshop_website:category_list')
     else:
         form = CategoryForm()
-    return render(request, 'home/category_add.html', {'form' : form})
+    return render(request, 'trendshop_website/category_add.html', {'form' : form})
 
 @login_required
 @user_passes_test(is_seller)
@@ -62,7 +62,7 @@ def add_product(request):
             return redirect('trendshop_website:category_list')  # Redirect to a list of products or another relevant page
     else:
         form = ProductsForm()
-    return render(request, 'home/product_add.html', {'form': form})
+    return render(request, 'trendshop_website/product_add.html', {'form': form})
 
 
 def product_update(request, product_id):
@@ -78,7 +78,7 @@ def product_update(request, product_id):
         if form.is_valid():
             form.save()
             return redirect('trendshop_website:product_list', subcategory_id=subcategory_id)
-    return render(request, 'home/product_update.html', {'form': form, 'product': product})
+    return render(request, 'trendshop_website/product_update.html', {'form': form, 'product': product})
 
 
 def product_delete(request,product_id):
@@ -96,7 +96,7 @@ def product_delete(request,product_id):
 
 def product_details(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    return render(request, 'home/product_detail.html', {"product":product})
+    return render(request, 'trendshop_website/product_detail.html', {"product":product})
 
 
 
@@ -135,32 +135,24 @@ class AdminDashboardView(LoginRequiredMixin, CustomPermissionRequired, TemplateV
         return context
 
 
-class AddToCartView(LoginRequiredMixin, CreateView):
-    form_class = AddToCartForm
-    success_url = reverse_lazy('trendshop_website:product_list')
-
-    def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.item_id = self.kwargs.get('pk')
-        cart = Cart.objects.get(user__id=self.request.user.id, status=True)
-        if not Cart.objects.filter(id=cart.id, carts__item=instance.item_id).exists():
-            instance.cart = cart
-            instance.save()
-        else:
-            cart_item_quantity = cart.carts.all().get(item__id=instance.item_id)
-            total = instance.quantity + cart_item_quantity.quantity
-            cart_item_quantity.quantity = total
-            cart_item_quantity.save()
-        return JsonResponse({"status": "success", "message": "Added To Cart"})
+def add_to_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    cart,_ = Cart.objects.get_or_create(user=request.user)
+    cart, created = CartItem.objects.get_or_create(item=product,user=request.user,cart=cart)
+    cart.quantity += 1
+    cart.save()
+    success_url = reverse("trendshop_website:cart")
+    return JsonResponse({"status": "success", "message": "Added To Cart","success_url":success_url})
 
 
 class CartView(LoginRequiredMixin, ListView):
     model = Cart
-    template_name = 'cart/cart.html'
+    template_name = 'trendshop_website/cart.html'
     context_object_name = 'carts'
 
     def get_queryset(self):
         return Cart.objects.filter(user=self.request.user, status=True)
+
 
 
 class IncreaseItemQuantityView(LoginRequiredMixin, UpdateView):
@@ -199,20 +191,20 @@ class RemoveItemFromCartView(LoginRequiredMixin, DeleteView):
         return redirect('trendshop_website:cart')
 
 
-# class CheckoutView(LoginRequiredMixin, CreateView):
-#     form_class = OrderAddressForm
-#     template_name = 'cart/checkout.html'
-#     success_url = reverse_lazy('trendshop_website:payment')
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(CheckoutView, self).get_context_data(**kwargs)
-#         form = self.get_form()
-#         form.fields['delivery_address'].queryset = self.request.user.addresses.all()
-#         context.update({
-#             'form': form,
-#             'carts': Cart.objects.filter(user=self.request.user, status=True)
-#         })
-#         return context
+class CheckoutView(LoginRequiredMixin, CreateView):
+    form_class = OrderAddressForm
+    template_name = 'trendshop_website/checkout.html'
+    success_url = reverse_lazy('trendshop_website:payment')
+
+    def get_context_data(self, **kwargs):
+        context = super(CheckoutView, self).get_context_data(**kwargs)
+        form = self.get_form()
+        form.fields['delivery_address'].queryset = self.request.user.addresses.all()
+        context.update({
+            'form': form,
+            'carts': Cart.objects.filter(user=self.request.user, status=True)
+        })
+        return context
 
 
 # @login_required
@@ -290,7 +282,7 @@ class RemoveItemFromCartView(LoginRequiredMixin, DeleteView):
 
 class OrderListView(LoginRequiredMixin, FilterView):
     model = Order
-    template_name = 'admin/order/order_list.html'
+    template_name = 'trendshop_website/order_list.html'
     context_object_name = 'orders'
     filterset_class = OrderFilter
     paginate_by = 9
@@ -342,7 +334,7 @@ class OrderRefundedStatusView(LoginRequiredMixin, CustomPermissionRequired, Upda
 
 class OrderDetailView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
     model = Order
-    template_name = 'admin/order/order_detail.html'
+    template_name = 'trendshop_website/order_detail.html'
     context_object_name = 'order'
 
     def get(self, request, *args, **kwargs):

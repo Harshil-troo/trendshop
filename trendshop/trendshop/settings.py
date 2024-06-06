@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'psycopg2',
-    'django_faker',
 ]
 
 MIDDLEWARE = [

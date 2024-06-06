@@ -1,9 +1,9 @@
 from django.urls import path,include
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetCompleteView
 from trendshop_website.views import home, OrderListView, OrderDetailView, \
-    AddToCartView, CartView, IncreaseItemQuantityView, DecreaseItemQuantityView, \
+    CartView, IncreaseItemQuantityView, DecreaseItemQuantityView, \
     RemoveItemFromCartView, AdminDashboardView, OrderDeliveredStatusView, \
-    OrderRefundedStatusView, NewsLetterView
+    OrderRefundedStatusView, NewsLetterView,add_to_cart,CheckoutView
 from . import views
 app_name = 'trendshop_website'
 
@@ -22,13 +22,13 @@ urlpatterns = [
     path('product/<int:product_id>/', views.product_details, name='product_details'),
     path('dashboard/', AdminDashboardView.as_view(), name='dashboard'),
 
-    path('add-to-cart/<int:product_id>/', AddToCartView.as_view(), name='add_to_cart'),
+    path('add-to-cart/<int:product_id>/',views.add_to_cart, name='add_to_cart'),
     path('cart/', CartView.as_view(), name='cart'),
     path('increase-quantity/<int:pk>/', IncreaseItemQuantityView.as_view(), name='increase_quantity'),
     path('decrease-quantity/<int:pk>/', DecreaseItemQuantityView.as_view(), name='decrease_quantity'),
     path('remove-from-cart/<int:pk>/', RemoveItemFromCartView.as_view(), name='remove_from_cart'),
 
-    # path('checkout/', CheckoutView.as_view(), name='checkout'),
+    path('checkout/', CheckoutView.as_view(), name='checkout'),
     # path('payment/', order_payment, name='payment'),
     # path('callback/', callback, name='callback'),
     path('order/list/', OrderListView.as_view(), name='order_list'),

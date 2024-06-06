@@ -19,23 +19,19 @@
                 </div>
                 <div class="product-actions">
                     {% if user.is_authenticated and user.user_types == "buyer" %}
-                            <a class="btn btn-outline-danger" href='#'>Buy Now</a>
-                            <form action="{% url 'trendshop_website:add_to_cart' item.id %}" method="POST"
-                                class="add-to-cart-form" id="addToCart">
-                                {% csrf_token %}
-                                {{ add_to_cart.as_p }}
-                                <button type="submit" class="btn btn-outline-primary">Add To Cart</button>
-                            </form>
+                        <a class="btn btn-outline-danger" href='#'>Buy Now</a>
+                         {% csrf_token %}
+                        <button type="submit" id="add-to-cart-button" data-link="{% url 'trendshop_website:add_to_cart' product.id %}" class="btn btn-outline-primary">Add To Cart</button>
                     {% elif user.is_authenticated and user.user_types == "seller" %}
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#editModal{{ product.id }}"><i class="fa fa-edit fa-lg"></i> Edit
-                            </button>
-                            <button class="btn btn-outline-danger" data-bs-toggle="modal"
-                                data-bs-target="#DeleteModal{{ product.id }}"><i class="fa fa-trash-can fa-lg"></i> Delete
-                            </button>
-                        {% else %}
-                            <a class="btn btn-outline-danger" href="{% url 'user:login' %}">Buy Now</a>
-                            <a class="btn btn-outline-primary" href="{% url 'user:login' %}">Add to Cart</a>
+                        <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                            data-bs-target="#editModal{{ product.id }}"><i class="fa fa-edit fa-lg"></i> Edit
+                        </button>
+                        <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                            data-bs-target="#DeleteModal{{ product.id }}"><i class="fa fa-trash-can fa-lg"></i> Delete
+                        </button>
+                    {% else %}
+                        <a class="btn btn-outline-danger" href="{% url 'user:login' %}">Buy Now</a>
+                        <a class="btn btn-outline-primary" href="{% url 'user:login' %}">Add to Cart</a>
                     {% endif %}
                 </div>
             </div>
@@ -148,4 +144,7 @@
 </style>
 {% endblock %}
 
-
+{% block extrajs %}
+{{ block.super }}
+<script src="/static/trendshop_website/js/add_to_cart.js"></script>
+{% endblock extrajs %}

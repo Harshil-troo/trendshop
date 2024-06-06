@@ -26,7 +26,7 @@
                             <label class="label" style="color: rgba(11, 122, 114, 1)">Address</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="address-icon">
-                                    <i class="fa-solid fa-location-dot" style="color: #0b7a72;"></i>
+                                    <i class="fa-solid fa-home" style="color: #0b7a72;"></i>
                                 </span>
                                 {% render_field form.address aria-describedby="address-icon" %}
                             </div>
@@ -40,14 +40,14 @@
                             <label class="label" style="color: rgba(11, 122, 114, 1)">City</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="city-icon">
-                                    <i class="fa-solid fa-map" style="color: #0b7a72;"></i>
+                                    <i class="fa-solid fa-location-dot" style="color: #0b7a72;"></i>
                                 </span>
                                 {% render_field form.city aria-describedby="city-icon" %}
                             </div>
                             <label class="label" style="color: rgba(11, 122, 114, 1)">State</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="state-icon">
-                                    <i class="fa-solid fa-map" style="color: #0b7a72;"></i>
+                                    <i class="fa-solid fa-location-dot" style="color: #0b7a72;"></i>
                                 </span>
                                 {% render_field form.state aria-describedby="state-icon" %}
                             </div>
@@ -73,12 +73,15 @@
 </div>
 <br>
 
-<script src="{% static 'js/user/user.js' %}"></script>
-<script src="{% static 'js/toast.js' %}"></script>
+
 <link type="text/css" rel="stylesheet" href="{% static 'css/user_address.css' %}" />
-<link type="text/css" rel="stylesheet" href="{% static 'css/select2.css' %}" />
-<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
 {% endblock content %}
 {% block footer %}
 {% include 'footer.html' %}
 {% endblock footer %}
+
+{% block extrajs %}
+{{ block.super }}
+<script src="{% static 'user/js/user.js' %}"></script>
+
+{% endblock %}
