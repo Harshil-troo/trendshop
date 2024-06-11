@@ -100,39 +100,6 @@ def product_details(request, product_id):
 
 
 
-class AdminDashboardView(LoginRequiredMixin, CustomPermissionRequired, TemplateView):
-    template_name = 'admin_dashboard.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(AdminDashboardView, self).get_context_data(**kwargs)
-        total_users = User.objects.count()
-        total_active_users = User.objects.filter(is_active=True).count()
-        total_orders = Order.objects.count()
-        total_sales = Order.objects.filter(status='Delivered').aggregate(
-            Sum('total_amount'))['total_amount__sum']
-        user_data = User.objects.values('date_joined__month').annotate(
-            Count('date_joined__month'))
-        active_user_data = User.objects.filter(is_active=True).values('date_joined__month') \
-            .annotate(Count('date_joined__month'))
-        order_data = Order.objects.values('created__month').annotate(Count('created__month'))
-        delivered_order_data = Order.objects.filter(status='Delivered').values('created__month') \
-            .annotate(Count('created__month'))
-        sales_data = Order.objects.filter(status='Delivered').values('created__month').annotate(
-            Sum('total_amount'))
-        total_sales_data = sales_data.values_list('total_amount__sum', flat=True)
-        context.update({
-            'total_users': total_users,
-            'total_active_users': total_active_users,
-            'total_orders': total_orders,
-            'total_sales': round(total_sales, 2),
-            'user_data': user_data,
-            'active_user_data': active_user_data,
-            'order_data': order_data,
-            'delivered_order_data': delivered_order_data,
-            'sales_data': sales_data,
-            'total_sales_data': total_sales_data
-        })
-        return context
 
 
 def add_to_cart(request, product_id):
@@ -207,79 +174,6 @@ class CheckoutView(LoginRequiredMixin, CreateView):
         return context
 
 
-# @login_required
-# def order_payment(request):
-#     if request.method == 'POST':
-#         form = OrderAddressForm(request.POST)
-#         order = form.save(commit=False)
-#         order.cart = Cart.objects.get(user__id=request.user.id, status=True)
-#         order.user = request.user
-#         order.save()
-#         client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
-#         razorpay_order = client.order.create({
-#             "amount": int(order.total_amount) * 100, "currency": "INR", "payment_capture": "1"
-#         })
-#         payment = OrderPayment.objects.create(user=request.user, order=order,
-#                                               provider_order_id=razorpay_order["id"])
-#         payment.save()
-#         return render(request, "frontend/payment/payment.html", {
-#             "callback_url": "https://" + "0ce4-2405-204-8386-9f68-596d-4395-a910-7cae.ngrok-free.app" + "/callback/",
-#             "razorpay_key": RAZORPAY_KEY_ID,
-#             "order": payment,
-#         })
-#     return render(request, "frontend/payment/payment.html")
-
-
-# @csrf_exempt
-# def callback(request):
-#     if "razorpay_signature" in request.POST:
-#         payment_id = request.POST.get("razorpay_payment_id", "")
-#         provider_order_id = request.POST.get("razorpay_order_id", "")
-#         signature_id = request.POST.get("razorpay_signature", "")
-#         payment = OrderPayment.objects.get(provider_order_id=provider_order_id)
-#         payment.payment_id = payment_id
-#         payment.signature_id = signature_id
-#         payment.save()
-#
-#         params_dict = {
-#             "razorpay_payment_id": payment_id,
-#             "razorpay_order_id": provider_order_id,
-#             "razorpay_signature": signature_id
-#         }
-#
-#         client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
-#         result = client.utility.verify_payment_signature(params_dict)
-#         if result is True:
-#             try:
-#                 payment.status = 'Success'
-#                 payment.order.status = 'Confirmed'
-#                 payment.order.save()
-#                 payment.save()
-#                 return render(request, "frontend/payment/callback.html",
-#                               context={"status": payment.status, "order_id": payment.order.pk})
-#             except:
-#                 payment.status = 'Failure'
-#                 payment.order.status = 'Cancelled'
-#                 payment.order.save()
-#                 payment.save()
-#                 return render(request, "frontend/payment/callback.html",
-#                               context={"status": payment.status, "order_id": payment.order.pk})
-#     else:
-#         if request.POST.get("error[metadata]") is None:
-#             return render(request, "frontend/payment/callback.html")
-#         else:
-#             payment_id = json.loads(request.POST.get("error[metadata]")).get("payment_id")
-#             provider_order_id = json.loads(request.POST.get("error[metadata]")).get("order_id")
-#             payment = OrderPayment.objects.get(provider_order_id=provider_order_id)
-#             payment.payment_id = payment_id
-#             payment.status = 'Failure'
-#             payment.order.status = 'Cancelled'
-#             payment.order.save()
-#             payment.save()
-#             return render(request, "frontend/payment/callback.html",
-#                           context={"status": payment.status})
-
-
 class OrderListView(LoginRequiredMixin, FilterView):
     model = Order
     template_name = 'trendshop_website/order_list.html'
@@ -309,7 +203,7 @@ class OrderDeliveredStatusView(LoginRequiredMixin, CustomPermissionRequired, Upd
 
     def get_success_url(self):
         pk = self.kwargs['pk']
-        return reverse('foodmania_website:order_detail', kwargs={'pk': pk})
+        return reverse('trendshop_website:order_detail', kwargs={'pk': pk})
 
     def get(self, request, *args, **kwargs):
         order = get_object_or_404(Order, id=kwargs['pk'])
@@ -323,7 +217,7 @@ class OrderRefundedStatusView(LoginRequiredMixin, CustomPermissionRequired, Upda
 
     def get_success_url(self):
         pk = self.kwargs['pk']
-        return reverse('foodmania_website:order_detail', kwargs={'pk': pk})
+        return reverse('trendshop_website:order_detail', kwargs={'pk': pk})
 
     def get(self, request, *args, **kwargs):
         order = get_object_or_404(Order, id=kwargs['pk'])
@@ -348,11 +242,3 @@ class OrderDetailView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
             return True
 
 
-class ContactUsView(CreateView):
-    form_class = ContactUsForm
-    success_url = reverse_lazy('foodmania_website:website')
-
-
-class NewsLetterView(CreateView):
-    form_class = NewsLetterSubscriptionForm
-    success_url = reverse_lazy('foodmania_website:website')

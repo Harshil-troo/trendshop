@@ -56,7 +56,7 @@ class Cart(TimeStampedModel):
 
     @property
     def total_tax(self):
-        result = float(self.cart_total) * 18/100
+        result = round(self.cart_total) * 18/100
         return result
 
     @property
@@ -67,7 +67,7 @@ class Cart(TimeStampedModel):
 
     @property
     def order_total(self):
-        bill = float(self.cart_total) + float(self.total_tax) + float(self.delivery_charges)
+        bill = float(self.cart_total) + round(self.total_tax) + float(self.delivery_charges)
         return bill
 
 
