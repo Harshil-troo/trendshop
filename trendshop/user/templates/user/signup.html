@@ -45,11 +45,12 @@
                                     </p>
                                 </div>
                             </div>
+
                             <form method="POST" novalidate>
                                 {% csrf_token %}
                                 {% if form.errors %}
                                 {% for key, error in form.errors.items %}
-                                {{ error }}
+                                <h6>{{ error }}</h6>
                                 {% endfor %}
                                 {% endif %}
                                 <label class="label" style="color: rgba(11, 122, 114, 1)">User Types</label>
@@ -80,7 +81,8 @@
                                     </span>
                                     {% render_field form.phone_number aria-describedby="phone-number-icon" %}
                                 </div>
-                                <label id ="gst-label" class="label" style="color: rgba(11, 122, 114, 1); display: none;">GST Number</label>
+                                <label id="gst-label" class="label"
+                                    style="color: rgba(11, 122, 114, 1); display: none;">GST Number</label>
                                 <div class="input-group mb-3" id="gst-field" style="display: none;">
                                     <span class="input-group-text" id="gst-number-icon">
                                         <i class="fa-solid fa-bars" style="color: #0b7a72;"></i>
@@ -102,7 +104,7 @@
                                     {% render_field form.password2 aria-describedby="confirm-password-icon" %}
                                 </div>
                                 <br>
-                                <div  id="signup-button" class="form-group" style="display: none;">
+                                <div id="signup-button" class="form-group" style="display: none;">
                                     <button type="submit" class="btn btn--outline-secondary rounded w-100"
                                         style="background-color: rgba(11, 122, 114, 1);font-weight: bold;">Signup
                                     </button>
@@ -123,6 +125,7 @@
             </div>
         </div>
     </section>
-<script src="{% static 'user/js/registration.js' %}"></script>
+    <script src="{% static 'user/js/registration.js' %}"></script>
 </body>
+
 </html>

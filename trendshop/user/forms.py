@@ -140,9 +140,8 @@ class UserForm(forms.ModelForm):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         repassword = cleaned_data.get("repassword")
-
         if password != repassword:
-            raise forms.ValidationError("Please type the same password.")
+            raise forms.ValidationError("The Password do not match.")
 
 
     def __init__(self, *args, **kwargs):

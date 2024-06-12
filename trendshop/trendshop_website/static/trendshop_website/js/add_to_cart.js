@@ -1,9 +1,6 @@
 $(document).ready(function() {
     $("#add-to-cart-button").on("click", function(event) {
         var form = $(this);
-        var formData = form.serializeArray();
-        var cartItemQuantity = document.getElementById('cartItemQuantity');
-//        var csrfToken = $("input[name='csrfmiddlewaretoken']").first().val();
 
         for (key of document.cookie.split(';')) {
           if (key.includes("csrftoken"))  {

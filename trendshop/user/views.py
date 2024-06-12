@@ -8,7 +8,6 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from django_filters.views import FilterView
 from trendshop.views import CustomPermissionRequired
-from user.tasks import send_welcome_email
 from user.filters import UserFilter
 from user.forms import SignupForm, ProfileForm, UserAddressForm,UserForm
 from user.models import User, UserAddress

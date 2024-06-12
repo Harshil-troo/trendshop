@@ -1,5 +1,5 @@
 from django import forms
-from trendshop_website.models import CartItem, Order, NewsLetter, ContactUs, Reservation
+from trendshop_website.models import CartItem, Order
 from user.models import UserAddress
 
 from trendshop_website.models import Category,Product
@@ -37,25 +37,4 @@ class OrderAddressForm(forms.ModelForm):
         fields = ['delivery_address']
 
 
-class ReservationForm(forms.ModelForm):
-    message = forms.CharField(max_length=200, widget=forms.Textarea(attrs={'class': 'form-control'}))
 
-    class Meta:
-        model = Reservation
-        fields = ['name', 'email', 'date', 'time', 'people', 'message']
-
-
-class ContactUsForm(forms.ModelForm):
-    message = forms.CharField(max_length=200, widget=forms.Textarea(attrs={'class': 'form-control'}))
-
-    class Meta:
-        model = ContactUs
-        fields = ['name', 'email', 'subject', 'message']
-
-
-class NewsLetterSubscriptionForm(forms.ModelForm):
-    email = forms.EmailField(max_length=50, widget=forms.EmailInput(attrs={'class': 'form-control'}))
-
-    class Meta:
-        model = NewsLetter
-        fields = ['email']

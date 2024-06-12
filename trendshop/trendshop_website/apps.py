@@ -5,5 +5,3 @@ class TrendshopWebsiteConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'trendshop_website'
 
-    def ready(self):
-        from . import signals

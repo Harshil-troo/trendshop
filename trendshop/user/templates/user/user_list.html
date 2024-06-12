@@ -46,14 +46,13 @@
                 <th style="justify-content: center">Profile Image</th>
                 <th style="justify-content: center">User Types</th>
                 <th style="text-align: center">First Name</th>
-                <th style="text-align: center">Second Name</th>
+                <th style="text-align: center">Last Name</th>
                 <th style="text-align: center">Username</th>
                 <th style="text-align: center">Email</th>
                 <th style="text-align: center">Gender</th>
                 <th style="text-align: center">Birth Date</th>
                 <th style="text-align: center">GST Number</th>
                 <th style="text-align: center">Contact Number</th>
-                <th class="actions" style="text-align: center">User Profile</th>
             </tr>
         </thead>
         <tbody align="center" class="bg-light">
@@ -94,11 +93,6 @@
                 </td>
                 <td>
                     <p class="fw-normal mb-1">{{ user.phone_number }}</p>
-                </td>
-                <td>
-                    <a class="btn btn-outline-dark" href="{% url 'user:profile' user.id %}">
-                        View Profile
-                    </a>
                 </td>
             </tr>
             {% endfor %}

@@ -67,7 +67,7 @@ class Cart(TimeStampedModel):
 
     @property
     def order_total(self):
-        bill = float(self.cart_total) + round(self.total_tax) + float(self.delivery_charges)
+        bill = round(self.cart_total) + round(self.total_tax) + round(self.delivery_charges)
         return bill
 
 
@@ -78,7 +78,7 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return f"ID: {self.id}, Product_ID: {self.cart}, Product_item: {self.item}, Quantity: {self.quantity}"
+        return f"ID: {self.id}, Product_item: {self.item}, Quantity: {self.quantity}"
 
     def sub_total(self):
         return self.quantity * self.item.price
@@ -115,52 +115,7 @@ class Order(TimeStampedModel):
         return str(self.order)
 
 
-class OrderPayment(TimeStampedModel):
-    PAYMENT_STATUS = (
-        ('Success', 'Success'),
-        ('Failure', 'Failure'),
-        ('Pending', 'Pending')
-    )
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mypayments',
-                             null=True, blank=True)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='payment',
-                              null=True, blank=True)
-    status = models.CharField(max_length=10, choices=PAYMENT_STATUS, default='Pending',
-                              null=True, blank=True)
-    provider_order_id = models.CharField(max_length=40, null=False, blank=False)
-    payment_id = models.CharField(max_length=40, null=False, blank=False)
-    signature_id = models.CharField(max_length=150, null=False, blank=False)
-
-    def __str__(self):
-        return str(self.order)
 
 
-class Reservation(TimeStampedModel):
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=60)
-    date = models.DateField()
-    time = models.CharField(max_length=20)
-    people = models.PositiveSmallIntegerField()
-    message = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.email
-
-
-class ContactUs(TimeStampedModel):
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=60)
-    subject = models.CharField(max_length=70)
-    message = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.email
-
-
-class NewsLetter(TimeStampedModel):
-    email = models.EmailField(max_length=50, unique=True)
-
-    def __str__(self):
-        return self.email
 

@@ -21,7 +21,7 @@
                     {% csrf_token %}
                     {% if form.errors %}
                     {% for key, error in form.errors.items %}
-                    {{ error }}
+                    <h6>{{ error }}</h6>
                     {% endfor %}
                     {% endif %}
                     <div class="d-flex justify-content-between align-items-center mb-3">

@@ -84,3 +84,7 @@ input {
     font-weight: bold !important;
     color: #6c757d !important;
 }
+
+h6 {
+    color: red;
+}

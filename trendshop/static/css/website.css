@@ -1,4 +1,4 @@
-.d-flex{
+.d-flex {
     padding-top: 7px;
     display: -webkit-inline-box !important;
     margin-bottom: 20px;
@@ -13,16 +13,18 @@
 .category-container {
     display: flex;
     justify-content: space-between;
-    align-items:unset;
+    align-items: unset;
     flex-wrap: nowrap;
     margin-top: 20px;
     margin-right: 0px;
     padding: 0px;
-    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+    overflow-x: auto;
+    /* Enable horizontal scrolling if necessary */
 }
 
 .category-item {
-    flex: 0 0 calc(10% - 20px); /* Adjusted width */
+    flex: 0 0 calc(10% - 20px);
+    /* Adjusted width */
     text-align: center;
     background-color: #f8f9fa;
     border-radius: 10px;
@@ -61,50 +63,60 @@
     color: #007bff;
 }
 
-#carousel_slide{
+#carousel_slide {
     height: 175px;
 }
 
-.carousel-control-prev, .carousel-control-next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+.carousel-control-prev,
+.carousel-control-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
 /* Position the "next button" to the right */
 .carousel-control-next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.carousel-control-prev:hover, .carousel-control-next:hover {
-  background-color: rgba(0,0,0,0.8);
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 
 }
+
 .card-deck {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping onto multiple lines */
-    overflow-x: auto; /* Enable horizontal scrolling if necessary */
-    margin-bottom: -20px; /* Remove bottom margin to prevent extra space */
+    flex-wrap: nowrap;
+    /* Prevent wrapping onto multiple lines */
+    overflow-x: auto;
+    /* Enable horizontal scrolling if necessary */
+    margin-bottom: -20px;
+    /* Remove bottom margin to prevent extra space */
 }
 
 .card {
     margin-top: 20px;
     margin-bottom: 20px;
-    flex: 0 0 auto; /* Prevent flex items from growing */
-    width: calc(33.333% - 20px); /* Adjusted width for each card */
-    margin-right: 20px; /* Add right margin to separate cards */
-    margin-left: 5px; /* Add right margin to separate cards */
+    flex: 0 0 auto;
+    /* Prevent flex items from growing */
+    width: calc(33.333% - 20px);
+    /* Adjusted width for each card */
+    margin-right: 20px;
+    /* Add right margin to separate cards */
+    margin-left: 5px;
+    /* Add right margin to separate cards */
     border: none;
     /* border-radius: 15px; */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -112,7 +124,8 @@
 }
 
 .card:last-child {
-    margin-right: 0; /* Remove right margin from last card */
+    margin-right: 0;
+    /* Remove right margin from last card */
 }
 
 .card:hover {
@@ -128,35 +141,36 @@
 
 
 .text-muted {
-    color: #6c757d; /* Adjust text-muted color as needed */
+    color: #6c757d;
+    /* Adjust text-muted color as needed */
 }
 
-p.card-text-container{
+p.card-text-container {
     font-size: smaller;
 
 }
 
-#featured_carousel{
+#featured_carousel {
     margin-bottom: 15px;
     display: flex;
 }
 
 #carouselExampleControls,
 #carouselExampleControls2,
-#carouselExampleControls3{
+#carouselExampleControls3 {
     width: 330px;
     margin-left: auto;
 }
 
-#image_row{
+#image_row {
     margin-left: 5px;
 }
 
-p.card-body{
+p.card-body {
     text-align: center;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
@@ -199,21 +213,22 @@ a:hover {
     font-size: 1rem;
     color: #555;
 }
+
 #product-list .btn {
     margin: 10px 12px;
 }
 
-#category-item a{
+#category-item a {
     font-size: 0.80rem;
     color: rgba(11, 122, 114, 1);
 }
 
-#category-item a:hover{
+#category-item a:hover {
     font-weight: bold;
     text-decoration: none;
     color: rgba(11, 122, 114, 1);
 }
 
-#carouselExampleIndicators{
+#carouselExampleIndicators {
     margin: 0px 12px 0px 12px;
 }

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Category,Product
 from django.utils.html import format_html
 from import_export.admin import ImportExportModelAdmin
-from trendshop_website.models import Cart, CartItem, Order, OrderPayment
+from trendshop_website.models import Cart, CartItem
 
 admin.site.register(Category)
 admin.site.register(Product)
@@ -34,31 +34,5 @@ class CartItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     food_image.short_description = 'Product Image'
 
-
-@admin.register(Order)
-class OrderAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    """
-    This class will register order model in admin site.
-    """
-    date_hierarchy = 'created'
-    search_fields = ['order', 'user__username', 'user__email', 'user__phone_number']
-    list_display = ['order', 'user', 'total_amount', 'status']
-    list_filter = ['status']
-    list_editable = ['status']
-    list_per_page = 10
-
-
-@admin.register(OrderPayment)
-class OrderPaymentAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    """
-    This class will register order payment model in admin site.
-    """
-    date_hierarchy = 'created'
-    search_fields = ['order', 'provider_order_id', 'payment_id', 'signature_id', 'user__username',
-                     'user__email', 'user__phone_number']
-    list_display = ['order', 'user', 'status']
-    list_filter = ['status']
-    list_editable = ['status']
-    list_per_page = 10
 
 

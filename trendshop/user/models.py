@@ -48,17 +48,21 @@ class User(AbstractUser):
         ordering = ['id']
 
     def __str__(self):
-        return str(self.username)
+        return f"{self.first_name} {self.last_name}"
 
 
 class UserAddress(models.Model):
     """
     This model will store user address details.
     """
+
+    HOME = "Home"
+    WORK = "Work"
+    OTHER = "Other"
     TYPE = (
-        ('Home', 'Home'),
-        ('Work', 'Work'),
-        ('Other', 'Other')
+        (HOME, 'Home'),
+        (WORK, 'Work'),
+        (OTHER, 'Other')
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses')
     address = models.CharField(max_length=200)

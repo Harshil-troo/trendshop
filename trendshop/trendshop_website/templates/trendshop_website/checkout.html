@@ -4,7 +4,7 @@
 {% block content %}
 {% for cart in carts %}
 {% if cart.carts.all %}
-<form method="POST" >
+<form method="POST">
     <div class="card" style="margin-top: 20px;">
         <div class="row">
             <div class="col-md-12 cart">
@@ -27,7 +27,7 @@
                             {% render_field form.delivery_address %}
                         </div>
                         <div class="col">
-                            <a class="btn btn-primary" href="{% url 'user:address_create' %}">Create new address</a>
+                            <a class="btn btn-primary" href="{% url 'user:address_list' %}">Create new address</a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,9 @@
             <div class="col-md-12 cart">
                 <div class="title">
                     <div class="row">
-                        <div class="col"><h4 style="color: rgba(11, 122, 114, 1)">ORDER DETAILS</h4></div>
+                        <div class="col">
+                            <h4 style="color: rgba(11, 122, 114, 1)">ORDER DETAILS</h4>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -67,7 +69,7 @@
                     <div class="row main align-items-center">
                         <div class="col-2">
                             <img class="img-fluid" src="{{ item.item.image.url }}" alt="Product Image"
-                                 style="width: 100px; height: 100px;border-radius: 10px;"/>
+                                style="width: 100px; height: 100px;border-radius: 10px;" />
                         </div>
                         <div class="col">
                             <p class="mb-1" style="font-size: 20px;">{{ item.item }}</p>
@@ -135,9 +137,10 @@
                                     Delivery Charges:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </span>
                                 {% if cart.delivery_charges == 0 %}
-                                <span class="lead fw-bold" style="color: rgba(11, 122, 114, 1);margin-left: 10px">Free</span>
+                                <span class="lead fw-bold"
+                                    style="color: rgba(11, 122, 114, 1);margin-left: 10px">Free</span>
                                 {% else %}
-                                <span class="lead fw-bold" style="margin-left: 5px;">₹ {{ cart.delivery_charges }}</span>
+                                <span class="lead fw-bold" style="margin-left: 5px;">₹ {{ cart.delivery_charges}}</span>
                                 {% endif %}
                             </p>
                         </div>
@@ -148,7 +151,8 @@
                         <div class="col">
                             <p class="mb-0 me-5 d-flex align-items-center">
                                 <span style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;">
-                                    Total Amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    Total
+                                    Amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </span>
                                 <span class="lead fw-bold" style="margin-left: 10px;">₹ {{ cart.order_total }}</span>
                             </p>
@@ -163,7 +167,7 @@
     <div style="display: flex; justify-content:flex-end">
         <div style="display: flex; justify-content:flex-end">
             <a class="btn btn-tertiary" href="{% url 'trendshop_website:category_list'  %}"
-               style="margin-right: 10px;color: rgba(11, 122, 114, 1)">Add Products</a>
+                style="margin-right: 10px;color: rgba(11, 122, 114, 1)">Add Products</a>
             <button type="submit" class="btn btn-primary">Proceed to Payment</button>
         </div>
     </div>
@@ -179,7 +183,7 @@
                         There are no items in your cart.
                     </strong>
                     <a class="btn btn-primary" href="{% url 'trendshop_website:category_list' %}"
-                       style="margin-right: 10px;">Add Products Items</a>
+                        style="margin-right: 10px;">Add Products Items</a>
                 </span>
             </p>
         </div>
@@ -205,8 +209,8 @@
 {% endif %}
 {% endfor %}
 
-<link type="text/css" rel="stylesheet" href="{% static 'css/cart.css' %}"/>
-<link type="text/css" rel="stylesheet" href="{% static 'css/select2.css' %}"/>
+<link type="text/css" rel="stylesheet" href="{% static 'css/cart.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'css/select2.css' %}" />
 <script src="{% static 'js/select2.js' %}"></script>
 {% endblock content %}
 {% block footer %}

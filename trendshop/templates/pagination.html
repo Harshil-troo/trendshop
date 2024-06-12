@@ -9,20 +9,17 @@
 <div class="justify-content-end" id="bottom_link" aria-label="Page navigation example">
     <ul class="pagination justify-content-end">
         {% if page_obj.has_previous %}
-        <li class="page-item"><a class="page-link btn btn-secondary"
-                                 href="?&page=1">
-            <b class="text-dark">&laquo;</b></a></li>
-        <li class="page-item"><a class="page-link btn btn-secondary"
-                                 href="?&page={{ page_obj.previous_page_number }}">
-            <b class="text-dark">Previous</b></a></li>
+        <li class="page-item"><a class="page-link btn btn-secondary" href="?&page=1">
+                <b class="text-dark">&laquo;</b></a></li>
+        <li class="page-item"><a class="page-link btn btn-secondary" href="?&page={{ page_obj.previous_page_number }}">
+                <b class="text-dark">Previous</b></a></li>
         {% endif %}
         {% if page_obj.has_next %}
         <li class="page-item"><a class="page-link btn btn-outline-secondary"
-                                 href="?&page={{ page_obj.next_page_number }}">
-            <b class="text-dark">Next</b></a></li>
-        <li class="page-item"><a class="page-link btn btn-secondary"
-                                 href="?&page={{ page_obj.paginator.num_pages }}">
-            <b class="text-dark">&raquo;</b></a></li>
+                href="?&page={{ page_obj.next_page_number }}">
+                <b class="text-dark">Next</b></a></li>
+        <li class="page-item"><a class="page-link btn btn-secondary" href="?&page={{ page_obj.paginator.num_pages }}">
+                <b class="text-dark">&raquo;</b></a></li>
         {% endif %}
     </ul>
 </div>

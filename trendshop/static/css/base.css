@@ -3,7 +3,10 @@ body {
     background: rgba(11, 122, 114, 0.2);
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
     background-color: rgba(11, 122, 114, 1);
     border-color: rgba(11, 122, 114, 1);
 }
@@ -13,11 +16,14 @@ body {
     color: rgba(11, 122, 114, 1);
 }
 
-.btn-outline-primary:hover, .btn-outline-primary:focus {
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
     background-color: rgba(11, 122, 114, 1);
     border-color: rgba(11, 122, 114, 1);
 }
 
-.btn-tertiary, .btn-tertiary:hover, .btn-tertiary:focus {
+.btn-tertiary,
+.btn-tertiary:hover,
+.btn-tertiary:focus {
     border-color: rgba(11, 122, 114, 1);
 }

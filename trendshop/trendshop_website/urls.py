@@ -1,6 +1,6 @@
 from django.urls import path,include
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetCompleteView
-from trendshop_website.views import home, OrderListView, OrderDetailView, \
+from trendshop_website.views import home, OrderListView, \
     CartView, IncreaseItemQuantityView, DecreaseItemQuantityView, \
     RemoveItemFromCartView, OrderDeliveredStatusView, \
     OrderRefundedStatusView,add_to_cart,CheckoutView
@@ -31,6 +31,4 @@ urlpatterns = [
     path('order/list/', OrderListView.as_view(), name='order_list'),
     path('order/status/delivered/<int:pk>/', OrderDeliveredStatusView.as_view(), name='delivered_status'),
     path('order/status/refunded/<int:pk>/', OrderRefundedStatusView.as_view(), name='refunded_status'),
-    path('order/detail/<int:pk>/', OrderDetailView.as_view(), name='order_detail'),
 ]
-3

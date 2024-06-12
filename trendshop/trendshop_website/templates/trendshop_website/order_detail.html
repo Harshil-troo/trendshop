@@ -40,22 +40,25 @@
         <div style="margin: auto">
             <div class="title">
                 <div class="row">
-                    <div class="col"><h3 style="color: rgba(11, 122, 114, 1)">CHANGE ORDER STATUS</h3></div>
+                    <div class="col">
+                        <h3 style="color: rgba(11, 122, 114, 1)">CHANGE ORDER STATUS</h3>
+                    </div>
                 </div>
             </div>
             <p class="mb-0 me-5">
-            <span>
-                <strong style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;margin: auto">
-                    Change status to
-                </strong>
-                {% if order.status == 'Delivered' %}
-                <a class="btn btn-danger" href="{% url 'foodmania_website:refunded_status' order.id %}">Refunded</a>
-                {% elif order.status == 'Deleted' %}
-                {% else %}
-                <a class="btn btn-success" href="{% url 'foodmania_website:delivered_status' order.id %}">Delivered</a>
-                <a class="btn btn-danger" href="{% url 'foodmania_website:refunded_status' order.id %}">Refunded</a>
-                {% endif %}
-            </span>
+                <span>
+                    <strong style="color: rgba(11, 122, 114, 1);font-size: 20px;font-weight: bold;margin: auto">
+                        Change status to
+                    </strong>
+                    {% if order.status == 'Delivered' %}
+                    <a class="btn btn-danger" href="{% url 'foodmania_website:refunded_status' order.id %}">Refunded</a>
+                    {% elif order.status == 'Deleted' %}
+                    {% else %}
+                    <a class="btn btn-success"
+                        href="{% url 'foodmania_website:delivered_status' order.id %}">Delivered</a>
+                    <a class="btn btn-danger" href="{% url 'foodmania_website:refunded_status' order.id %}">Refunded</a>
+                    {% endif %}
+                </span>
             </p>
         </div>
     </div>
@@ -135,7 +138,9 @@
         <div class="col-md-12 cart">
             <div class="title">
                 <div class="row">
-                    <div class="col"><h3 style="color: rgba(11, 122, 114, 1)">ORDER ITEMS</h3></div>
+                    <div class="col">
+                        <h3 style="color: rgba(11, 122, 114, 1)">ORDER ITEMS</h3>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -162,7 +167,7 @@
                 <div class="row main align-items-center">
                     <div class="col-2">
                         <img class="img-fluid" src="{{ item.item.image.url }}" alt="Food Image"
-                             style="width: 100px; height: 100px"/>
+                            style="width: 100px; height: 100px" />
                     </div>
                     <div class="col">
                         <p class="mb-1 fw-bold" style="font-size: 20px;">{{ item.item.name }}</p>
@@ -207,7 +212,7 @@
 </div>
 <br>
 
-<link type="text/css" rel="stylesheet" href="{% static 'css/cart.css' %}"/>
+<link type="text/css" rel="stylesheet" href="{% static 'css/cart.css' %}" />
 {% endblock content %}
 {% block footer %}
 {% include 'footer.html' %}

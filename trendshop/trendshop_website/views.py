@@ -17,9 +17,8 @@ from django.views.generic import CreateView, UpdateView, DeleteView, DetailView,
 from django_filters.views import FilterView
 from trendshop.views import CustomPermissionRequired
 from trendshop_website.filters import OrderFilter
-from trendshop_website.forms import OrderAddressForm, AddToCartForm, NewsLetterSubscriptionForm, ContactUsForm, \
-    ReservationForm
-from trendshop_website.models import Order, Cart, CartItem, OrderPayment
+from trendshop_website.forms import OrderAddressForm, AddToCartForm
+from trendshop_website.models import Order, Cart, CartItem
 from user.models import User
 
 def home(request):
@@ -172,6 +171,23 @@ class CheckoutView(LoginRequiredMixin, CreateView):
             'carts': Cart.objects.filter(user=self.request.user, status=True)
         })
         return context
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class OrderListView(LoginRequiredMixin, FilterView):

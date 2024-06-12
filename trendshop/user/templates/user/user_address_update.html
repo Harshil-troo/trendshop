@@ -20,7 +20,7 @@
                             {% csrf_token %}
                             {% if form.errors %}
                             {% for key, error in form.errors.items %}
-                            {{ error }}
+                            <h6>{{ error }}</h6>
                             {% endfor %}
                             {% endif %}
                             <label class="label" style="color: rgba(11, 122, 114, 1)">Address</label>
