@@ -26,13 +26,13 @@ class CartItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     This class will register cart item model in admin site.
     """
     search_fields = ['cart__user__username', 'item__name']
-    list_display = ['cart', 'item', 'quantity', 'food_image']
+    list_display = ['cart', 'item', 'quantity', 'product_image']
     list_per_page = 10
 
-    def food_image(self, obj):
+    def product_image(self, obj):
         return format_html("<img src='{}' width='55' height='55'/>".format(obj.item.image.url))
 
-    food_image.short_description = 'Product Image'
+    product_image.short_description = 'Product Image'
 
 
 

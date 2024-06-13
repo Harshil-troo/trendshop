@@ -47,8 +47,7 @@ class User(AbstractUser):
         """
         ordering = ['id']
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+
 
 
 class UserAddress(models.Model):
