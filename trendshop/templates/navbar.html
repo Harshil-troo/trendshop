@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background: rgba(108, 117, 125, 0.6)">
     <div class="container" id="header">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-md-2" id="logo">
                 <!-- Logo of a site -->
                 <a href="{% url 'trendshop_website:home' %}"><img src="/media/logo.png" alt="company logo" width="100" height="100"></a>
@@ -14,11 +14,12 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown" >
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Welcome <b>{{user.first_name}}</b>
                             <img src="{{ user.image.url }}" class="rounded-circle" height="30" width="30"
                              loading="lazy"/>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item">
+                            Hello, <b>{{user.first_name}}</b></a>
                             <a class="dropdown-item" href="{% url 'user:profile' user.id %}">
                                 <i class="fa-regular fa-circle-user"></i> My Profile </a>
                             <a class="dropdown-item" href="{% url 'user:address_list' %}">
