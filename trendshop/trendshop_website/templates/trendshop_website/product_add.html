@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 10px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f3f3f3;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    .form-container input,select
+    .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #eaeaea;
+
+    .form-container btn[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+        .my-form {
+        margin-top: 20px;
+    }
+    .my-form .form-group {
+        margin-bottom: 20px;
+    }
+    .my-form label {
+        font-weight: bold;
+    }
+    .my-form input,
+    .my-form select,
+    .my-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<div class="form-container" id="add-product">
+    <h2 class="my-4">Add Product</h2>
+    <form method="post" enctype="multipart/form-data" class="my-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-outline-primary" style="margin-left: 170px;">Add Product</button>
+    </form><br>
+
+</div>
+<link type="text/css" rel="stylesheet" href="{% static 'css/website.css' %}" />
+{% endblock content %}

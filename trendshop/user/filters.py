@@ -24,4 +24,4 @@ class UserFilter(django_filters.FilterSet):
         order options,verbose_name, and a lot of other options.
         """
         model = User
-        fields = ['is_superuser', 'is_staff', 'is_active']
+        fields = ['is_superuser', 'is_staff', 'is_active','user_types']

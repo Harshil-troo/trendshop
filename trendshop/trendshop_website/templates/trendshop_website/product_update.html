@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 10px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f3f3f3;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    .form-container input[type="text"],
+    .form-container textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #eaeaea;
+
+    }
+</style>
+<div class="form-container">
+    <h2>Edit Product</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-primary" style="margin-left: 170px;">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

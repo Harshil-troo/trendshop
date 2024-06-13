@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-image">
+                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="product-details">
+                <h1 class="product-title">{{ product.title }}</h1>
+                <p class="product-description">{{ product.description }}</p>
+                <div class="product-info">
+                    <p class="product-price">Price: ₹{{ product.price }}</p>
+                    <p class="product-stock">Stock: {{ product.stock }}</p>
+                </div>
+                <div class="product-actions">
+                    {% if user.is_authenticated and user.user_types == "buyer" %}
+                        <a class="btn btn-outline-danger" href='#'>Buy Now</a>
+                         {% csrf_token %}
+                        <button type="submit" id="add-to-cart-button" data-link="{% url 'trendshop_website:add_to_cart' product.id %}" class="btn btn-outline-primary">Add To Cart</button>
+                    {% elif user.is_authenticated and user.user_types == "seller" %}
+                        <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                            data-bs-target="#editModal{{ product.id }}"><i class="fa fa-edit fa-lg"></i> Edit
+                        </button>
+                        <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                            data-bs-target="#DeleteModal{{ product.id }}"><i class="fa fa-trash-can fa-lg"></i> Delete
+                        </button>
+                    {% else %}
+                        <a class="btn btn-outline-danger" href="{% url 'user:login' %}">Buy Now</a>
+                        <a class="btn btn-outline-primary" href="{% url 'user:login' %}">Add to Cart</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Delete Modal -->
+
+<div class="modal fade" id="DeleteModal{{ product.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+     data-toggle="modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-5">Delete Product</h3>
+               <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <b>{{ product.title }}</b> ?
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark"
+                            data-bs-dismiss="modal">Cancel
+                    </button>
+                    <form action="{% url 'trendshop_website:product_delete' product.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Product Update Modal-->
+<div class="modal fade" id="editModal{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ product.id }}"
+     data-toggle="modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="editModalLabel">Edit Product</h3>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                                aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to edit <strong>{{ product.title }}</strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+                <a href="{% url 'trendshop_website:product_update' product.id %}" class="btn btn-outline-primary">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-image {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .product-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .product-details {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    }
+
+    .product-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .product-description {
+        font-size: 1.0rem;
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .product-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .product-price,
+    .product-stock {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .product-actions {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+
+</style>
+{% endblock %}
+
+{% block extrajs %}
+{{ block.super }}
+<script src="/static/trendshop_website/js/add_to_cart.js"></script>
+{% endblock extrajs %}

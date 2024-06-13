@@ -15,17 +15,23 @@
     margin-top:-20px;
 }
 #logo a:hover {
-    color: #007bff;
+    color: rgba(11, 122, 114, 0.2);
 }
 
-.col-md-4 {
+.col-md-2 {
     width: 33.333333333333333333%;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+    color: rgba(255, 255, 255, 0.75);
 }
 
 #menu li {
     padding-inline-start: 20px;
     text-decoration: none;
     list-style-type: none;
+    margin-left: 80px;
 }
 
 #menu li a {
@@ -34,6 +40,8 @@
     padding: 8px 10px;
     display: inline-block;
     transition: color 0.3s ease;
+  font-size: 0.875em; /* 14px/16=0.875em */
+
 }
 input#searchbar{
     border-radius: 50px;
@@ -42,11 +50,31 @@ input#searchbar{
 }
 
 #menu li a:hover {
-    color: #007bff;
+    color: rgba(11, 122, 114, 0.2);
 }
 
 #searchbar {
-    display: inline-block !important;
+    display: inline-block ;
     padding-top: 9px;
+}
+#userlist li {
+    padding-inline-start: 20px;
+    text-decoration: none;
+    list-style-type: none;
+    margin-left: 80px;
+}
+#userlist a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 10px;
+    display: inline-block;
+    transition: color 0.3s ease;
+    width: max-content;
+    font-size: 0.875em; /* 14px/16=0.875em */
 
 }
+
+#userlist li a:hover {
+    color: rgba(11, 122, 114, 0.2);
+}
+

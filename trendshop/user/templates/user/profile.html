@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container rounded bg-white mt-5 mb-5 border border-secondary">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <a href="#profile_image" role="img">
+                    <img class="rounded-circle mt-5" width="200px" height="200px" src="{{ user.image.url }}"
+                        style="max-width:100%" data-bs-target="#offcanvasWithBothOptions" data-bs-toggle="offcanvas">
+                </a>
+                <br>
+                <span class="font-weight-bold">{{ user.username }}</span>
+                <span class="text-black-50">{{ user.email }}</span>
+            </div>
+        </div>
+        <div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+                <form method="POST" enctype="multipart/form-data" id="updateProfile">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    {% for key, error in form.errors.items %}
+                    <h6>{{ error }}</h6>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="label" style="color: rgba(11, 122, 114, 1)">First
+                                Name</label>{{ form.first_name }}</div>
+                        <div class="col-md-6"><label class="label" style="color: rgba(11, 122, 114, 1)">Last
+                                Name</label>{{ form.last_name }}</div>
+                    </div>
+                    <div class="row mt-3">
+                        <label class="label" style="color: rgba(11, 122, 114, 1)">Username</label>
+                        <div class="input-group mb-3 col-md-12">
+                            <span class="input-group-text" id="user-icon">
+                                <i class="fa-solid fa-user" style="color: #0b7a72;"></i>
+                            </span>
+                            {% render_field form.username aria-describedby="user-icon" %}
+                        </div>
+                        <label class="label" style="color: rgba(11, 122, 114, 1)">Email Address</label>
+                        <div class="input-group mb-3 col-md-12">
+                            <span class="input-group-text" id="email-icon">
+                                <i class="fa-solid fa-envelope" style="color: #0b7a72;"></i>
+                            </span>
+                            {% render_field form.email aria-describedby="email-icon" %}
+                        </div>
+                        <label class="label" style="color: rgba(11, 122, 114, 1)">Contact Number</label>
+                        <div class="input-group mb-3 col-md-12">
+                            <span class="input-group-text" id="contact-number-icon">
+                                <i class="fa-solid fa-phone" style="color: #0b7a72;"></i>
+                            </span>
+                            {% render_field form.phone_number aria-describedby="contact-number-icon" %}
+                        </div>
+                        <label class="label" style="color: rgba(11, 122, 114, 1)">Birth Date</label>
+                        <div class="input-group mb-3 col-md-12">
+                            <span class="input-group-text" id="birth-date-icon">
+                                <i class="fa-solid fa-calendar-days" style="color: #0b7a72;"></i>
+                            </span>
+                            {% render_field form.birth_date aria-describedby="birth-date-icon" %}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="label" style="color: rgba(11, 122, 114, 1)">Gender</label>
+                            {{ form.gender }}
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button type="submit" class="btn btn-primary">
+                            Save Profile
+                        </button>
+                        <a class="btn btn-secondary" href="{% url 'user:password_change'%}">
+                            <i class="fa-solid fa-key"></i> Change Password
+                        </a>
+                    </div>
+                    <div class="offcanvas offcanvas-bottom" data-bs-scroll="true" tabindex="-1" style="height: 150px"
+                        id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                        <br>
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Set Profile Image</h5>
+
+                        </div>
+                        <div class="offcanvas-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ form.image }}
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-primary w-auto"
+                                        onclick="getResponseForProfileUpdate()">Set as Profile Image
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link type="text/css" rel="stylesheet" href="{% static 'css/profile.css' %}" />
+
+{% endblock content %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}

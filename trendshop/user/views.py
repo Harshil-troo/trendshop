@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 """This file contains class based views for user and user address model."""
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -8,12 +8,13 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from django_filters.views import FilterView
 from trendshop.views import CustomPermissionRequired
-from trendshop_website.tasks import send_welcome_email
 from user.filters import UserFilter
-from user.forms import SignupForm, ProfileForm, UserAddressForm
+from user.forms import SignupForm, ProfileForm, UserAddressForm,UserForm
 from user.models import User, UserAddress
 from django.contrib.auth import logout
 
+
+from django.utils.translation import gettext_lazy as _
 
 
 
@@ -32,7 +33,7 @@ class SignupView(CreateView):
     This class will create new user instance.
     """
     form_class = SignupForm
-    template_name = 'registration/signup.html'
+    template_name = 'user/signup.html'
     success_url = reverse_lazy('user:login')
 
     def post(self, request, *args, **kwargs):
@@ -54,7 +55,7 @@ class ProfileView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     """
     model = User
     form_class = ProfileForm
-    template_name = 'admin/user/profile.html'
+    template_name = 'user/profile.html'
 
     def get_success_url(self):
         pk = self.kwargs['pk']
@@ -91,7 +92,7 @@ class UserListView(LoginRequiredMixin, CustomPermissionRequired, FilterView):
     This class will return a list of all users only if user is superuser.
     """
     model = User
-    template_name = 'admin/user/user_list.html'
+    template_name = 'user/user_list.html'
     context_object_name = 'users'
     filterset_class = UserFilter
 
@@ -113,7 +114,7 @@ class UserAddressCreateView(CreateView):
     This class will create user address.
     """
     form_class = UserAddressForm
-    template_name = 'admin/user_address/user_address_create.html'
+    template_name = 'user/user_address_list.html'
     success_url = reverse_lazy('user:address_list')
 
     def post(self, request, *args, **kwargs):
@@ -134,7 +135,7 @@ class UserAddressListView(LoginRequiredMixin, ListView):
     This class will return a list of addresses of specific user if user is authenticated.
     """
     model = UserAddress
-    template_name = 'admin/user_address/user_address_list.html'
+    template_name = 'user/user_address_list.html'
     context_object_name = 'addresses'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -158,7 +159,7 @@ class UserAddressUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView)
     """
     model = UserAddress
     form_class = UserAddressForm
-    template_name = 'admin/user_address/user_address_create.html'
+    template_name = 'user/user_address_update.html'
     success_url = reverse_lazy('user:address_list')
 
     def test_func(self):
@@ -184,6 +185,7 @@ class UserAddressDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView)
         instance = self.get_object()
         if instance.user.id == self.request.user.id:
             return True
+
 
 
 def logout_view(request):

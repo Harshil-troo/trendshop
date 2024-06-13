@@ -23,6 +23,7 @@ class SignupForm(UserCreationForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
         self.fields['email'].required = True
+        self.fields['gst'].required = False
 
     class Meta:
         """
@@ -31,7 +32,7 @@ class SignupForm(UserCreationForm):
         order options,verbose_name, and a lot of other options.
         """
         model = User
-        fields = ['username', 'email', 'phone_number', 'password1', 'password2']
+        fields = ['username', 'email', 'user_types','gst','phone_number', 'password1', 'password2']
 
     def clean(self):
         """
@@ -114,3 +115,43 @@ class UserAddressForm(forms.ModelForm):
         """
         model = UserAddress
         fields = ['address', 'pincode', 'city', 'state', 'type']
+
+
+class UserForm(forms.ModelForm):
+    repassword = forms.CharField(required=True, label='Re-Enter Password',widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['user_types','first_name','last_name','email','password','gst','username','gender','phone_number']
+        labels = {
+            'first_name':'First Name',
+            'last_name':'Last Name',
+            'email':'Email Id',
+            'gst':'GST No.',
+            'username':'User Name',
+            'password':'Password',
+            'phone_number':'Phone Number'
+        }
+        widgets = {
+            'password':forms.PasswordInput,
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        repassword = cleaned_data.get("repassword")
+        if password != repassword:
+            raise forms.ValidationError("The Password do not match.")
+
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['gst'].required = False
+
+
+
+
+
+
+
+
